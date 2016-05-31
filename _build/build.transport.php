@@ -1,5 +1,11 @@
 <?php
 require_once 'build.class.php';
-$resolvers = array('sample');
-$builder = new siteBuilder('ilyaut', '1.0.7', 'beta', $resolvers);
+$resolvers = array(
+    'resources',
+    'settings',
+    'providers',
+    'addons',
+    'fix_translit'
+);
+$builder = new siteBuilder('site', '1.0.7', 'beta', $resolvers);
 $builder->build();
