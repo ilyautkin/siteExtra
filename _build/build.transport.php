@@ -5,7 +5,8 @@ $resolvers = array(
     'settings',
     'providers',
     'addons',
-    'fix_translit'
+    'fix_translit',
+    'tvs'
 );
 $builder = new siteBuilder('site', '1.0.7', 'beta', $resolvers);
 $builder->build();

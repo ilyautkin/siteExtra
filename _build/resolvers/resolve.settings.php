@@ -198,16 +198,27 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
         
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'fastuploadtv.translit'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'fastuploadtv',
+            'area'      => 'Default',
+            'xtype'     => 'combo-boolean',
+            'value'     => '1',
+            'key'       => 'fastuploadtv.translit',
+        ), '', true, true);
+        $tmp->save();
         
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'error_page_header'))) {
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'locale'))) {
             $tmp = $modx->newObject('modSystemSetting');
         }
         $tmp->fromArray(array(
             'namespace' => 'core',
-            'area'      => 'caching',
+            'area'      => 'language',
             'xtype'     => 'textfield',
-            'value'     => uniqid() . '_',
-            'key'       => 'cache_prefix',
+            'value'     => 'ru_RU.utf8',
+            'key'       => 'locale',
         ), '', true, true);
         $tmp->save();
 
