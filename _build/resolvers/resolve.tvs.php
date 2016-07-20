@@ -20,7 +20,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'type'         => 'fastuploadtv',
             'caption'      => 'Изображение',
             'input_properties' => array(
-                                    "path" => "assets/images/{id}/{d}-{m}-{y}/",
+                                    "path" => "assets/images/{d}-{m}-{y}/",
                                     "prefix" => "",
                                     "MIME" => "",
                                     "showValue" => false,
