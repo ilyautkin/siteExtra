@@ -1,7 +1,7 @@
 <?php
 require_once 'build.class.php';
 $resolvers = array(
-    'fix_file_permissions',
+    //'fix_file_permissions',
     'rename_htaccess',
     'resources',
     'settings',
@@ -12,5 +12,5 @@ $resolvers = array(
     'remove_changelog',
     'tvs'
 );
-$builder = new siteBuilder('site', '1.0.15', 'beta', $resolvers);
+$builder = new siteBuilder('site', '1.1.0', 'beta', $resolvers);
 $builder->build();
