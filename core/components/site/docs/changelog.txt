@@ -1,3 +1,8 @@
+1.1.1-beta
+==============
+- Form customisation
+- Add manager CSS
+
 1.1.0-beta
 ==============
 - Added fixes and resolvers

@@ -1,4 +1,5 @@
 <?php
+@ini_set('display_errors', 1);
 class siteBuilder {
     
     public $config = array(
@@ -7,6 +8,7 @@ class siteBuilder {
             'PACKAGE_RELEASE' => 'beta',
             'BUILD_RESOLVERS' => array()
         );
+    public $category_attr = array();
     public $modx;
     
     public function __construct($PACKAGE_NAME, $PACKAGE_VERSION, $PACKAGE_RELEASE, $BUILD_RESOLVERS) {
@@ -47,6 +49,7 @@ class siteBuilder {
         /* modx connection */
         define('MODX_API_MODE', true);
         require $this->config['MODX_BASE_PATH'] . 'index.php';
+        require $this->config['PACKAGE_ROOT'] . '_build/includes/functions.php';
         $this->modx = &$modx;
         $this->modx->setLogLevel(modX::LOG_LEVEL_INFO);
         $this->modx->setLogTarget('ECHO');
@@ -89,17 +92,38 @@ class siteBuilder {
         $category = $this->modx->newObject('modCategory');
         $category->set('category', $this->config['PACKAGE_NAME']);
         
-        /* create category vehicle */
-        $attr = array(
-        	xPDOTransport::UNIQUE_KEY => 'category',
-        	xPDOTransport::PRESERVE_KEYS => false,
-        	xPDOTransport::UPDATE_OBJECT => true,
-        	xPDOTransport::RELATED_OBJECTS => true,
-        );
-        $vehicle = $builder->createVehicle($category, $attr);
+        $this->category_attr[xPDOTransport::UNIQUE_KEY] = 'category';
+        $this->category_attr[xPDOTransport::PRESERVE_KEYS] = false;
+        $this->category_attr[xPDOTransport::UPDATE_OBJECT] = true;
+        $this->category_attr[xPDOTransport::RELATED_OBJECTS] = true;
+        
+        $this->addPlugins($category);
+        
+        $vehicle = $builder->createVehicle($category, $this->category_attr);
         $this->addResolvers($vehicle);
         $builder->putVehicle($vehicle);
         return $vehicle;
+    }
+    
+    public function addPlugins(&$category) {
+        $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Plugins'] = array(
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => BUILD_PLUGIN_UPDATE,
+            xPDOTransport::UNIQUE_KEY => 'name',
+        );
+        $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['PluginEvents'] = array(
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => BUILD_PLUGIN_UPDATE,
+            xPDOTransport::UNIQUE_KEY => array('pluginid', 'event'),
+        );
+        $modx = &$this->modx;
+        $plugins = include $this->config['PACKAGE_ROOT'] . '_build/data/transport.plugins.php';
+        if (!is_array($plugins)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in plugins.');
+        } else {
+            $category->addMany($plugins);
+            $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($plugins) . ' plugins.');
+        }
     }
     
     public function addResolvers(&$vehicle) {
@@ -112,7 +136,6 @@ class siteBuilder {
         	'source' => $this->config['PACKAGE_ROOT'] . 'core/components/' . strtolower($this->config['PACKAGE_NAME']),
         	'target' => "return MODX_CORE_PATH . 'components/';",
         ));
-        
         foreach ($this->config['BUILD_RESOLVERS'] as $resolver) {
         	if ($vehicle->resolve('php', array('source' => $this->config['PACKAGE_ROOT'] . '_build/resolvers/' . 'resolve.' . $resolver . '.php'))) {
         		$this->modx->log(modX::LOG_LEVEL_INFO, 'Added resolver "' . $resolver . '" to category.');

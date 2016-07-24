@@ -1,0 +1,16 @@
+#modx-resource-introtext {height: 113px !important;}
+#fastuploadtv1 {width: auto !important; height: auto !important; position: relative;}
+#fastuploadtv1 div div:first-child {position: absolute; left: 125px; bottom: -4px; width: auto;}
+#fastuploadtv1 div div:first-child img {width: 130px;}
+#fastuploadtv1 div div:last-child img {position: absolute; left: 190px; top: -35px; background: #fff; padding: 3px; border-radius: 4px;}
+
+/*
+#tv-image-1 {width: 310px !important; float: left !important;}
+#tv-image-preview-1 img {margin-top: -70px !important; margin-bottom: -18px !important; width: 150px !important; height: 100px !important;}
+
+#fastuploadtv1 div:first-child img {margin-left: 175px; margin-top: -80px;}
+fieldset + div #fastuploadtv1 div:first-child img {margin-left: 175px; margin-top: 39px;}
+#fastuploadtv1 div:last-child img {top: -5px !important; left: 215px; background: #fff; padding: 3px; border-radius: 4px; z-index: 2}
+#fastuploadtv1 div:last-child {margin-top: -39px; margin-bottom: -14px;}
+.x-form-item.x-tab-item.x-hide-label {position: relative; z-index: 2;}
+*/
