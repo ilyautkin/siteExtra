@@ -137,8 +137,7 @@ switch (@$options[xPDOTransport::PACKAGE_ACTION]) {
 		            'Console' => '2.1.0-beta',
 		            'FastUploadTV' => '1.0.0-beta2',
 		            'MIGX' => '2.9.6-pl',
-		            'translit' => '1.0.0-beta',
-		            'DirectResize2' => '1.1.4-rc1'
+		            'translit' => '1.0.0-beta'
 		        )),
 		    array('name' => 'modstore.pro', 'packages' => array(
 		            'Ace' => '1.6.5-pl',

@@ -29,13 +29,16 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ));
         $tv->save();
         
-        if (!$tvt = $modx->getObject('modTemplateVarTemplate', array('tmplvarid' => $tv->id, 'templateid' => $templateId))) {
-            $record = array('tmplvarid' => $tv->id, 'templateid' => $templateId);
-            $keys = array_keys($record);
-            $fields = '`' . implode('`,`', $keys) . '`';
-            $placeholders = substr(str_repeat('?,', count($keys)), 0, -1);
-            $sql = "INSERT INTO {$modx->getTableName('modTemplateVarTemplate')} ({$fields}) VALUES ({$placeholders});";
-            $modx->prepare($sql)->execute(array_values($record));
+        foreach ($modx->getCollection('modTemplate') as $template) {
+            $templateId = $template->id;
+            if (!$tvt = $modx->getObject('modTemplateVarTemplate', array('tmplvarid' => $tv->id, 'templateid' => $templateId))) {
+                $record = array('tmplvarid' => $tv->id, 'templateid' => $templateId);
+                $keys = array_keys($record);
+                $fields = '`' . implode('`,`', $keys) . '`';
+                $placeholders = substr(str_repeat('?,', count($keys)), 0, -1);
+                $sql = "INSERT INTO {$modx->getTableName('modTemplateVarTemplate')} ({$fields}) VALUES ({$placeholders});";
+                $modx->prepare($sql)->execute(array_values($record));
+            }
         }
         
         break;

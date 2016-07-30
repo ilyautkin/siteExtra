@@ -98,6 +98,7 @@ class siteBuilder {
         $this->category_attr[xPDOTransport::RELATED_OBJECTS] = true;
         
         $this->addPlugins($category);
+        $this->addTemplates($category);
         
         $vehicle = $builder->createVehicle($category, $this->category_attr);
         $this->addResolvers($vehicle);
@@ -123,6 +124,22 @@ class siteBuilder {
         } else {
             $category->addMany($plugins);
             $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($plugins) . ' plugins.');
+        }
+    }
+    
+    public function addTemplates(&$category) {
+        $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Templates'] = array(
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'templatename',
+        );
+        $modx = &$this->modx;
+        $templates = include $this->config['PACKAGE_ROOT'] . '_build/data/transport.templates.php';
+        if (!is_array($templates)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in templates.');
+        } else {
+            $category->addMany($templates);
+            $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($templates) . ' templates.');
         }
     }
     
