@@ -11,6 +11,13 @@ $tmp = array(
         'events' => array(
             'OnManagerPageInit' => array()
         )
+    ),
+    'siteRedirect' => array(
+        'file' => 'siteredirect',
+        'description' => '',
+        'events' => array(
+            'OnHandleRequest' => array()
+        )
     )
 );
 

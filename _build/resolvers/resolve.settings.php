@@ -221,6 +221,21 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'key'       => 'locale',
         ), '', true, true);
         $tmp->save();
+        
+        if (isset($_SESSION['setting_cache_prefix']) && $_SESSION['setting_cache_prefix']) {
+            if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'cache_prefix'))) {
+                $tmp = $modx->newObject('modSystemSetting');
+            }
+            $tmp->fromArray(array(
+                'namespace' => 'core',
+                'area'      => 'caching',
+                'xtype'     => 'textfield',
+                'value'     => $_SESSION['setting_cache_prefix'],
+                'key'       => 'cache_prefix',
+            ), '', true, true);
+            $tmp->save();
+            unset($_SESSION['setting_cache_prefix']);
+        }
 
         break;
 

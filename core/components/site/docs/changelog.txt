@@ -1,3 +1,8 @@
+1.1.2-beta
+==============
+- Add siteRedirect
+- Add DirectResize
+
 1.1.1-beta
 ==============
 - Form customisation

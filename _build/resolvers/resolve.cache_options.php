@@ -15,6 +15,7 @@ if ($object->xpdo) {
                     $modx->log(modX::LOG_LEVEL_INFO, 'Run <b>Cache options</b>');
                     $fp = fopen($file, "w");
                     $prefix = substr(md5(time()), 0, 8) . '_';
+                    $_SESSION['setting_cache_prefix'] = $prefix;
                     $content = str_replace(
                               '$config_options = array ('. PHP_EOL .');',
                               
