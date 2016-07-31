@@ -50,11 +50,50 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $tv->fromArray(array(
             'name'         => $name,
             'type'         => 'checkbox',
-            'caption'      => 'Отображение на странице',
+            'caption'      => 'Отображать на странице',
             'category'     => $cat_id,
             'elements'     => 'Дочерние ресурсы==1',
             'display'      => 'default',
             'default_text' => '1'
+        ));
+        $tv->save();
+        $tvs[] = $tv->get('id');
+        
+        $name = 'address';
+        if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
+            $tv = $modx->newObject('modTemplateVar');
+        }
+        $tv->fromArray(array(
+            'name'         => $name,
+            'type'         => 'text',
+            'caption'      => 'Адрес',
+            'category'     => $cat_id
+        ));
+        $tv->save();
+        $tvs[] = $tv->get('id');
+        
+        $name = 'phone';
+        if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
+            $tv = $modx->newObject('modTemplateVar');
+        }
+        $tv->fromArray(array(
+            'name'         => $name,
+            'type'         => 'text',
+            'caption'      => 'Телефон',
+            'category'     => $cat_id
+        ));
+        $tv->save();
+        $tvs[] = $tv->get('id');
+        
+        $name = 'email';
+        if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
+            $tv = $modx->newObject('modTemplateVar');
+        }
+        $tv->fromArray(array(
+            'name'         => $name,
+            'type'         => 'text',
+            'caption'      => 'E-mail',
+            'category'     => $cat_id
         ));
         $tv->save();
         $tvs[] = $tv->get('id');

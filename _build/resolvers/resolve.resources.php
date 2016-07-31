@@ -116,6 +116,36 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ));
         $resource->save();
 
+        /* Контактная информация */
+        $alias = 'contacts';
+        $parent = 0;
+        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+            $resource = $modx->newObject('modResource');
+        }
+        $resource->fromArray(array(
+            'class_key'    => 'modDocument',
+            'menuindex'    => 6,
+            'pagetitle'    => 'Контактная информация',
+            'isfolder'     => 1,
+            'alias'        => $alias,
+            'uri'          => $alias . '/',
+            'uri_override' => 0,
+            'published'    => 1,
+            'hidemenu'     => 0,
+            'richtext'     => 0,
+            'parent'       => $parent,
+            'template'     => $templateId,
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                <p>Адрес: [[*address]]</p>
+                <p>Телефон: [[*phone]]</p>
+                <p>E-mail: [[*email]]</p>
+            ")
+        ));
+        $resource->save();
+        $resource->setTVValue('address', 'г. Москва, ул. Печатников, д. 17, оф. 350');
+        $resource->setTVValue('phone', '+7 (499) 150-22-22');
+        $resource->setTVValue('email', 'info@company.ru');
+
         /* 404 */
         $alias = '404';
         $parent = 0;
