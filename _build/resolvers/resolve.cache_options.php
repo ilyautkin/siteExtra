@@ -20,8 +20,8 @@ if ($object->xpdo) {
                               '$config_options = array ('. PHP_EOL .');',
                               
                               '$config_options = array ('. PHP_EOL .
-                                '"cache_prefix" => "' . $prefix . '",'. PHP_EOL .
-                                '"cache_handler" => "cache.xPDOFileCache" // cache.xPDOMemCached' . PHP_EOL .
+                                '//"cache_prefix" => "' . $prefix . '",'. PHP_EOL .
+                                '//"cache_handler" => "cache.xPDOMemCached"' . PHP_EOL .
                               ');',
                               
                               $content);

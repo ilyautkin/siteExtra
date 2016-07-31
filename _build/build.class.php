@@ -109,12 +109,12 @@ class siteBuilder {
     public function addPlugins(&$category) {
         $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Plugins'] = array(
             xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => BUILD_PLUGIN_UPDATE,
+            xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::UNIQUE_KEY => 'name',
         );
         $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['PluginEvents'] = array(
             xPDOTransport::PRESERVE_KEYS => true,
-            xPDOTransport::UPDATE_OBJECT => BUILD_PLUGIN_UPDATE,
+            xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::UNIQUE_KEY => array('pluginid', 'event'),
         );
         $modx = &$this->modx;
@@ -140,6 +140,8 @@ class siteBuilder {
         } else {
             $category->addMany($templates);
             $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($templates) . ' templates.');
+            $first = array_shift($templates);
+            $_SESSION['site_template_name'] = $first->get('templatename');
         }
     }
     

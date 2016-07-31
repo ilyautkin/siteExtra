@@ -29,9 +29,9 @@ foreach ($tmp as $k => $v) {
         'category' => 0,
         'description' => @$v['description'],
         'plugincode' => getSnippetContent($this->config['PACKAGE_ROOT'] . 'core/components/'.strtolower($this->config['PACKAGE_NAME']).'/elements/plugins/plugin.' . $v['file'] . '.php'),
-        'static' => BUILD_PLUGIN_STATIC,
-        'source' => 1,
-        'static_file' => 'core/components/'.strtolower($this->config['PACKAGE_NAME']).'/elements/plugins/plugin.' . $v['file'] . '.php',
+        'static' => false,
+        //'source' => 1,
+        //'static_file' => 'core/components/'.strtolower($this->config['PACKAGE_NAME']).'/elements/plugins/plugin.' . $v['file'] . '.php',
     ), '', true, true);
 
     $events = array();

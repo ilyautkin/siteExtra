@@ -10,7 +10,7 @@ $tmp = array(
         'description' => ''
     )
 );
-
+$setted = false;
 foreach ($tmp as $k => $v) {
     
     /** @var modtemplate $template */
@@ -24,7 +24,6 @@ foreach ($tmp as $k => $v) {
         //'source' => 1,
         //'static_file' => 'core/components/'.strtolower($this->config['PACKAGE_NAME']).'/elements/templates/template.' . $v['file'] . '.html',
     ), '', true, true);
-
     $templates[] = $template;
 }
 unset($tmp, $properties);

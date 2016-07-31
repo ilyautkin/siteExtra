@@ -119,7 +119,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
         
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'setting_resource_tree_node_name'))) {
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'resource_tree_node_name'))) {
             $tmp = $modx->newObject('modSystemSetting');
         }
         $tmp->fromArray(array(
@@ -127,7 +127,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'area'      => 'manager',
             'xtype'     => 'textfield',
             'value'     => 'menutitle',
-            'key'       => 'setting_resource_tree_node_name',
+            'key'       => 'resource_tree_node_name',
         ), '', true, true);
         $tmp->save();
         
@@ -222,20 +222,17 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
         
-        if (isset($_SESSION['setting_cache_prefix']) && $_SESSION['setting_cache_prefix']) {
-            if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'cache_prefix'))) {
-                $tmp = $modx->newObject('modSystemSetting');
-            }
-            $tmp->fromArray(array(
-                'namespace' => 'core',
-                'area'      => 'caching',
-                'xtype'     => 'textfield',
-                'value'     => $_SESSION['setting_cache_prefix'],
-                'key'       => 'cache_prefix',
-            ), '', true, true);
-            $tmp->save();
-            unset($_SESSION['setting_cache_prefix']);
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'cache_prefix'))) {
+            $tmp = $modx->newObject('modSystemSetting');
         }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'caching',
+            'xtype'     => 'textfield',
+            'value'     => '',
+            'key'       => 'cache_prefix',
+        ), '', true, true);
+        $tmp->save();
 
         break;
 

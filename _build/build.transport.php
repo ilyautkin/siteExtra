@@ -4,6 +4,7 @@ $resolvers = array(
     'rename_htaccess',
     'remove_changelog',
     'cache_options',
+    'template',
     'resources',
     'settings',
     'providers',
@@ -14,5 +15,5 @@ $resolvers = array(
     'tvs',
     'manager_customisation'
 );
-$builder = new siteBuilder('site', '1.1.2', 'beta', $resolvers);
+$builder = new siteBuilder('site', '1.1.3', 'beta', $resolvers);
 $builder->build();
