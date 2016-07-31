@@ -7,50 +7,19 @@
 <header>
   <a href="[[++site_url]]" id="logo"></a>
   <nav>
-    [[pdoMenu?
-        &startId=`0`
-        &level=`1`
-        &resources=``
-        &outerClass=``
-        &firstClass=``
-        &lastClass=``
-        &tplHere=`@INLINE <li[[+classes]]>[[+menutitle]][[+wrapper]]</li>`
-    ]]
+    [[$menu]]
   </nav>
 </header>
 <section>
   <article>
     <h1>[[*longtitle:default=`[[*pagetitle]]`]]</h1>
     <div id="content">[[*content]]</div>
-    <div id="list_childs">
-      [[!pdoPage?
-        &tpl=`@INLINE <h3><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></h3>
-            {if $img}<img src="{$img | phpthumbon : "w=75&h=75&zc=1"}" style="float: left; margin: 5px 8px 8px 0;">{/if}
-            {$content | striptags | ellipsis : "250"}`
-        &limit=`15`
-        &includeTVs=`img`
-        &tvPrefix=``
-        &includeContent=`1`
-        
-        &tplPageWrapper=`@INLINE <ul class="pagination">[[+prev]] [[+pages]] [[+next]]</ul>`
-        &tplPage=`@INLINE <li><a href="[[+href]]#list_childs">[[+pageNo]]</a></li>`
-        &tplPageActive=`@INLINE <li class="active">[[+pageNo]]</li>`
-        &tplPagePrev=`@INLINE <li class="prev"><a[[+classes]][[+title]] href="[[+href]]#list_childs">« Назад</a></li>`
-        &tplPageNext=`@INLINE <li class="next"><a[[+classes]][[+title]] href="[[+href]]#list_childs">Дальше »</a></li>`
-        &tplPageFirst=`@INLINE <span></span>`
-        &tplPageLast=`@INLINE <span></span>`
-        
-        &tplPageFirstEmpty=`@INLINE <span></span>`
-        &tplPageLastEmpty=`@INLINE <span></span>`
-        &tplPagePrevEmpty=`@INLINE <span></span>`
-        &tplPageNextEmpty=`@INLINE <span></span>`
-      ]]
-    </div>
-    [[!+page.nav]]
+    [[[[*show_child:eq=`1`:then=`$child_list`:else=`--`]]]]
   </article>
 </section>
 <footer>
-  [[+MinifyX.javascript]]
+  [[!year? &start=`2016`]]
 </footer>
+  [[+MinifyX.javascript]]
 </body>
 </html>

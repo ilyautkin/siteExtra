@@ -8,7 +8,15 @@ $tmp = array(
     'head' => array(
         'file' => 'head',
         'description' => ''
-    )
+    ),
+    'menu' => array(
+        'file' => 'menu',
+        'description' => ''
+    ),
+    'child_list' => array(
+        'file' => 'child_list',
+        'description' => ''
+    ),
 );
 $setted = false;
 foreach ($tmp as $k => $v) {

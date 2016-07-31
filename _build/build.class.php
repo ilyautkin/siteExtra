@@ -91,6 +91,7 @@ class siteBuilder {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, 'Created category.');
         $category = $this->modx->newObject('modCategory');
         $category->set('category', $this->config['PACKAGE_NAME']);
+        $_SESSION['site_category'] = $this->config['PACKAGE_NAME'];
         
         $this->category_attr[xPDOTransport::UNIQUE_KEY] = 'category';
         $this->category_attr[xPDOTransport::PRESERVE_KEYS] = false;
@@ -98,6 +99,7 @@ class siteBuilder {
         $this->category_attr[xPDOTransport::RELATED_OBJECTS] = true;
         
         $this->addPlugins($category);
+        $this->addSnippets($category);
         $this->addTemplates($category);
         $this->addChunks($category);
         
@@ -125,6 +127,22 @@ class siteBuilder {
         } else {
             $category->addMany($plugins);
             $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($plugins) . ' plugins.');
+        }
+    }
+    
+    public function addSnippets(&$category) {
+        $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Snippets'] = array(
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => false,
+            xPDOTransport::UNIQUE_KEY => 'name',
+        );
+        $modx = &$this->modx;
+        $snippets = include $this->config['PACKAGE_ROOT'] . '_build/data/transport.snippets.php';
+        if (!is_array($snippets)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in snippets.');
+        } else {
+            $category->addMany($snippets);
+            $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($snippets) . ' snippets.');
         }
     }
     
