@@ -212,7 +212,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'uri'          => $alias . '.html',
                     'uri_override' => 0,
                     'published'    => 1,
-                    'publishedon'  => strtotime('now') - 60 * 60 * $i,
+                    'publishedon'  => time() - 60 * 60 * $i,
                     'hidemenu'     => 0,
                     'richtext'     => 1,
                     'parent'       => $specParent,
