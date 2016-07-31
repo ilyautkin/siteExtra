@@ -10,6 +10,12 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
 
+        $site_start = $modx->getObject('modResource', $modx->getOption('site_start'));
+        if ($site_start) {
+            $site_start->set('hidemenu', true);
+            $site_start->save();
+        }
+            
         /* robots.txt */
         $alias = 'robots';
         $parent = 0;
@@ -116,6 +122,247 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ));
         $resource->save();
 
+        /* О компании */
+        $alias = 'about';
+        $parent = 0;
+        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+            $resource = $modx->newObject('modResource');
+            $resource->set('content', preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                <p>Медиабизнес слабо допускает конструктивный формирование имиджа, учитывая результат предыдущих медиа-кампаний. Конвесия покупателя, конечно, по-прежнему востребована. Рыночная информация стабилизирует пресс-клиппинг, полагаясь на инсайдерскую информацию. План размещения без оглядки на авторитеты не так уж очевиден.</p>
+                <p>Психологическая среда индуцирует конструктивный стратегический маркетинг, оптимизируя бюджеты. Медиапланирование поддерживает общественный ребрендинг. Медиамикс правомочен. Медиапланирование стабилизирует стратегический рекламоноситель.</p>
+                <p>Рекламная площадка усиливает медиабизнес. Эволюция мерчандайзинга притягивает департамент маркетинга и продаж, оптимизируя бюджеты. Поэтому таргетирование стремительно усиливает целевой трафик. Потребление, вопреки мнению П.Друкера, редко соответствует рыночным ожиданиям. Имидж, следовательно, программирует медиамикс.</p>
+            "));
+        }
+        $resource->fromArray(array(
+            'class_key'    => 'modDocument',
+            'menuindex'    => 1,
+            'pagetitle'    => 'Информация о нас',
+            'menutitle'    => 'О компании',
+            'isfolder'     => 1,
+            'alias'        => $alias,
+            'uri'          => $alias . '/',
+            'uri_override' => 0,
+            'published'    => 1,
+            'hidemenu'     => 0,
+            'richtext'     => 1,
+            'parent'       => $parent,
+            'template'     => $templateId
+        ));
+        $resource->save();
+
+        /* Специалисты */
+        $alias = 'specialists';
+        $parent = 0;
+        $addspecs = false;
+        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+            $resource = $modx->newObject('modResource');
+            $addspecs = true;
+        }
+        $resource->fromArray(array(
+            'class_key'    => 'modDocument',
+            'menuindex'    => 2,
+            'pagetitle'    => 'Наши сотрудники',
+            'menutitle'    => 'Специалисты',
+            'isfolder'     => 1,
+            'alias'        => $alias,
+            'uri'          => $alias . '/',
+            'uri_override' => 0,
+            'published'    => 1,
+            'hidemenu'     => 0,
+            'richtext'     => 1,
+            'parent'       => $parent,
+            'template'     => $templateId,
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                <p></p>
+            ")
+        ));
+        $resource->save();
+        
+        if ($addspecs) {
+            $specParent = $resource->get('id');
+            for ($i = 1; $i <= 5; $i++) {
+                /* Специалист 1 */
+                $alias = 'spec-' . $i;
+                if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+                    $resource = $modx->newObject('modResource');
+                }
+                $resource->fromArray(array(
+                    'class_key'    => 'modDocument',
+                    'menuindex'    => $i,
+                    'pagetitle'    => 'Сотрудник ' . $i,
+                    'isfolder'     => 0,
+                    'alias'        => $alias,
+                    'uri'          => $alias . '.html',
+                    'uri_override' => 0,
+                    'published'    => 1,
+                    'hidemenu'     => 0,
+                    'richtext'     => 1,
+                    'parent'       => $specParent,
+                    'template'     => $templateId,
+                    'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                        <p></p>
+                    ")
+                ));
+                $resource->save();
+                $resource->setTVValue('img', $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/spec' . $i . '.png');
+            }
+        }
+
+        /* Отзывы */
+        $alias = 'reviews';
+        $parent = 0;
+        $addReviews = false;
+        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+            $resource = $modx->newObject('modResource');
+            $addReviews = true;
+        }
+        $resource->fromArray(array(
+            'class_key'    => 'CollectionContainer',
+            'menuindex'    => 3,
+            'pagetitle'    => 'Отзывы наших клиентов',
+            'menutitle'    => 'Отзывы',
+            'isfolder'     => 1,
+            'alias'        => $alias,
+            'uri'          => $alias . '/',
+            'uri_override' => 0,
+            'published'    => 1,
+            'hidemenu'     => 0,
+            'richtext'     => 1,
+            'parent'       => $parent,
+            'template'     => $templateId,
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                <p></p>
+            ")
+        ));
+        $resource->save();
+        
+        if ($addReviews) {
+            $reviewParent = $resource->get('id');
+            $reviews = array(
+                "<p>Восприятие, на первый взгляд, отражает гендерный стимул. Чем больше люди узнают друг друга, тем больше воспитание иллюстрирует коллективный импульс. Придерживаясь жестких принципов социального Дарвинизма, предсознательное отражает страх, также это подчеркивается в труде Дж.Морено \"Театр Спонтанности\". Ригидность отчуждает групповой эгоцентризм.</p>
+                <p>Рефлексия, как справедливо считает Ф.Энгельс, представляет собой экзистенциальный тест. Идентификация, по определению, отчуждает инсайт. Акцентуированная личность выбирает эмпирический страх. Страх, согласно традиционным представлениям, теоретически возможен.</p>
+                <p>Бессознательное, в представлении Морено, однородно выбирает кризис, это обозначено Ли Россом как фундаментальная ошибка атрибуции, которая прослеживается во многих экспериментах. Действие осознаёт гештальт. Как отмечает Д.Майерс, у нас есть некоторое чувство конфликта, которое возникает с ситуации несоответствия желаемого и действительного, поэтому бессознательное просветляет инсайт. Самоактуализация осознаёт филосовский объект. Гендер, по определению, изящно отталкивает латентный интеллект, в частности, \"психозы\", индуцируемые при различных психопатологических типологиях.</p>",
+                "<p>Самонаблюдение аннигилирует индивидуальный интеллект, следовательно основной закон психофизики: ощущение изменяется пропорционально логарифму раздражителя . Код начинает потребительский импульс, что вызвало развитие функционализма и сравнительно-психологических исследований поведения. Как отмечает Жан Пиаже, субъект традиционен.</p>
+                <p>Сновидение существенно отражает стимул. Роль, иcходя из того, что мгновенно отчуждает индивидуальный аутизм. Установка отталкивает групповой эгоцентризм, таким образом, стратегия поведения, выгодная отдельному человеку, ведет к коллективному проигрышу. Чувство, в представлении Морено, косвенно.</p>
+                <p>Психосоматика выбирает конвергентный филогенез, как и предсказывают практические аспекты использования принципов гештальпсихологии в области восприятия, обучения, развития психики, социальных взаимоотношений. В заключении добавлю, контраст концептуально понимает контраст. Компульсивность, например, притягивает психоз. Самость психологически аннигилирует автоматизм. Психосоматика фундаментально притягивает когнитивный объект. Аномия представляет собой концептуальный гомеостаз.</p>",
+                "<p>Акцентуированная личность интегрирует психоанализ. Чувство, как справедливо считает Ф.Энгельс, важно отталкивает девиантный филогенез. Всякая психическая функция в культурном развитии ребенка появляется на сцену дважды, в двух планах,— сперва социальном, потом — психологическом, следовательно рефлексия вероятна. Установка вызывает позитивистский психоз.</p>
+                <p>Сознание, конечно, начинает институциональный интеракционизм. Онтогенез речи, например, представляет собой конфликтный код. Когнитивная составляющая, в первом приближении, просветляет эгоцентризм. Наши исследования позволяют сделать вывод о том, что гештальт отталкивает ассоцианизм. Психе, в первом приближении, семантически представляет собой коллективный субъект. Л.С.Выготский понимал тот факт, что эскапизм начинает материалистический контраст.</p>
+                <p>Предсознательное иллюстрирует автоматизм, также это подчеркивается в труде Дж.Морено \"Театр Спонтанности\". Стратификация гомогенно отражает архетип, следовательно тенденция к конформизму связана с менее низким интеллектом. Социализация отражает культурный гомеостаз, что вызвало развитие функционализма и сравнительно-психологических исследований поведения. В связи с этим нужно подчеркнуть, что сновидение выбирает социометрический эриксоновский гипноз. Но так как книга Фридмана адресована руководителям и работникам образования, то есть сознание вызывает конформизм. Инсайт интегрирует экспериментальный интеллект.</p>"
+            );
+            for ($i = 1; $i <= 3; $i++) {
+                /* Отзыв 1 */
+                $alias = 'review-' . $i;
+                if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+                    $resource = $modx->newObject('modResource');
+                }
+                $review = $reviews[$i-1] ? $reviews[$i-1] : $review[0];
+                $resource->fromArray(array(
+                    'class_key'    => 'modDocument',
+                    'show_in_tree' => 0,
+                    'menuindex'    => $i,
+                    'pagetitle'    => 'Отзыв ' . $i,
+                    'isfolder'     => 0,
+                    'alias'        => $alias,
+                    'uri'          => $alias . '.html',
+                    'uri_override' => 0,
+                    'published'    => 1,
+                    'hidemenu'     => 0,
+                    'richtext'     => 1,
+                    'parent'       => $reviewParent,
+                    'template'     => $templateId,
+                    'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', $review)
+                ));
+                $resource->save();
+            }
+        }
+
+        /* Галерея */
+        $alias = 'gallery';
+        $parent = 0;
+        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+            $resource = $modx->newObject('modResource');
+        }
+        $resource->fromArray(array(
+            'class_key'    => 'modDocument',
+            'menuindex'    => 4,
+            'pagetitle'    => 'Галерея',
+            'isfolder'     => 1,
+            'alias'        => $alias,
+            'uri'          => $alias . '/',
+            'uri_override' => 0,
+            'published'    => 1,
+            'hidemenu'     => 0,
+            'richtext'     => 1,
+            'parent'       => $parent,
+            'template'     => $templateId,
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                <p></p>
+            ")
+        ));
+        $resource->save();
+
+        /* Новости */
+        $alias = 'news';
+        $parent = 0;
+        $addNews = false;
+        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+            $resource = $modx->newObject('modResource');
+            $addNews = true;
+        }
+        $resource->fromArray(array(
+            'class_key'    => 'CollectionContainer',
+            'menuindex'    => 5,
+            'pagetitle'    => 'Новости компании',
+            'menutitle'    => 'Новости',
+            'isfolder'     => 1,
+            'alias'        => $alias,
+            'uri'          => $alias . '/',
+            'uri_override' => 0,
+            'published'    => 1,
+            'hidemenu'     => 0,
+            'richtext'     => 1,
+            'parent'       => $parent,
+            'template'     => $templateId,
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                <p></p>
+            ")
+        ));
+        $resource->save();
+        
+        if ($addNews) {
+            $newsParent = $resource->get('id');
+            $news = array(
+                "<p>Кризис жанра дает фузз, потому что современная музыка не запоминается. Очевидно, что нота заканчивает самодостаточный контрапункт контрастных фактур. Показательный пример – хамбакер неустойчив. Аллюзийно-полистилистическая композиция иллюстрирует дискретный шоу-бизнес. Как было показано выше, хамбакер продолжает звукоряд, таким образом объектом имитации является число длительностей в каждой из относительно автономных ритмогрупп ведущего голоса.</p>",
+                "<p>В заключении добавлю, open-air дает конструктивный флажолет. Гипнотический рифф вызывает рок-н-ролл 50-х, благодаря быстрой смене тембров (каждый инструмент играет минимум звуков). Процессуальное изменение имеет определенный эффект \"вау-вау\". В заключении добавлю, процессуальное изменение выстраивает изоритмический цикл. Микрохроматический интервал, на первый взгляд, использует open-air, это понятие создано по аналогии с термином Ю.Н.Холопова \"многозначная тональность\".</p>",
+                "<p>Соноропериод многопланово трансформирует длительностный голос. Серпантинная волна иллюстрирует разнокомпонентный сет. Иными словами, фишка всекомпонентна. Микрохроматический интервал неустойчив. Процессуальное изменение представляет собой мнимотакт. Как было показано выше, адажио продолжает флажолет.</p>"
+            );
+            for ($i = 1; $i <= 3; $i++) {
+                /* Новость 1 */
+                $alias = 'news-' . $i;
+                if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+                    $resource = $modx->newObject('modResource');
+                }
+                $newsText = $news[$i-1] ? $news[$i-1] : $news[0];
+                $resource->fromArray(array(
+                    'class_key'    => 'modDocument',
+                    'show_in_tree' => 0,
+                    'menuindex'    => $i,
+                    'pagetitle'    => 'Новость ' . $i,
+                    'isfolder'     => 0,
+                    'alias'        => $alias,
+                    'uri'          => $alias . '.html',
+                    'uri_override' => 0,
+                    'published'    => 1,
+                    'hidemenu'     => 0,
+                    'richtext'     => 1,
+                    'parent'       => $newsParent,
+                    'template'     => $templateId,
+                    'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', $newsText)
+                ));
+                $resource->save();
+            }
+        }
+
         /* Контактная информация */
         $alias = 'contacts';
         $parent = 0;
@@ -135,16 +382,23 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'richtext'     => 0,
             'parent'       => $parent,
             'template'     => $templateId,
-            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', '
                 <p>Адрес: [[*address]]</p>
                 <p>Телефон: [[*phone]]</p>
                 <p>E-mail: [[*email]]</p>
-            ")
+                [[$contact_form]]
+            ')
         ));
         $resource->save();
-        $resource->setTVValue('address', 'г. Москва, ул. Печатников, д. 17, оф. 350');
-        $resource->setTVValue('phone', '+7 (499) 150-22-22');
-        $resource->setTVValue('email', 'info@company.ru');
+        if (!$resource->getTVValue('address')) {
+            $resource->setTVValue('address', 'г. Москва, ул. Печатников, д. 17, оф. 350');
+        }
+        if (!$resource->getTVValue('phone')) {
+            $resource->setTVValue('phone', '+7 (499) 150-22-22');
+        }
+        if (!$resource->getTVValue('email')) {
+            $resource->setTVValue('email', 'info@company.ru');
+        }
 
         /* 404 */
         $alias = '404';

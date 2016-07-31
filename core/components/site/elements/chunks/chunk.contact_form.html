@@ -1,0 +1,14 @@
+[[!AjaxForm?
+    &snippet=`FormIt`
+    &form=`form.contact_form`
+    &hooks=`email`
+  	&emailSubject=`Сообщение с сайта [[++site_url:replace=`http://== `:replace=`https://== `:replace=`/== `]]`
+  	&emailTo=`[[#[[contacts_id]].email]]`
+  	&emailTpl=`tpl.contact_form`
+    &validate=`name:required,phone:required,check:required`
+    &validationErrorMessage=`В форме содержатся ошибки!`
+    &successMessage=`<p>Наши специалисты свяжутся с вами в ближайшее время.</p>`
+    &name.vTextRequired=`Пожалуйста, укажите, как к вам обращаться`
+    &phone.vTextRequired=`Оставьте свой номер телефона, чтобы мы могли вам позвонить`
+    &check.vTextRequired=`Вы должны дать разрешение на обработку своих персональных данных`
+]]

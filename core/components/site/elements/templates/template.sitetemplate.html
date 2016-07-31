@@ -4,22 +4,21 @@
 [[$head]]
 </head>
 <body>
-<header>
-  <a href="[[++site_url]]" id="logo"></a>
-  <nav>
+  <div class="container">
+    [[$header]]
     [[$menu]]
-  </nav>
-</header>
-<section>
-  <article>
-    <h1>[[*longtitle:default=`[[*pagetitle]]`]]</h1>
-    <div id="content">[[*content]]</div>
-    [[[[*show_child:eq=`1`:then=`$child_list`:else=`--`]]]]
-  </article>
-</section>
-<footer>
-  [[!year? &start=`2016`]]
-</footer>
+    <section class="row">
+      <article class="col-sm-8">
+        <h1>[[*longtitle:default=`[[*pagetitle]]`]]</h1>
+        <div id="content">[[*content]]</div>
+        [[[[*show_child:eq=`1`:then=`$child_list`:else=`--`]]]]
+      </article>
+      <aside class="col-sm-4">
+        
+      </aside>
+    </section>
+    [[$footer]]
+  </div>
   [[+MinifyX.javascript]]
 </body>
 </html>

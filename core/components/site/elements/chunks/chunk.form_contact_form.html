@@ -1,0 +1,73 @@
+<br><h2>Задать вопрос</h2><br>
+<form action="" method="post" class="ajax_form form-horizontal">
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="af_name">Ваше имя</label>
+		<div class="col-sm-10">
+			<input type="text" id="af_name" name="name" value="" placeholder="" class="form-control" />
+			<span class="error_name"></span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="af_phone">Телефон</label>
+		<div class="col-sm-10">
+			<input type="phone" id="af_phone" name="phone" value="" placeholder="" class="form-control" />
+			<span class="error_phone"></span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="af_message">Ваш вопрос</label>
+		<div class="col-sm-10">
+			<textarea id="af_message" name="message" class="form-control" rows="5"></textarea>
+			<span class="error_message"></span>
+		</div>
+	</div>
+
+	<div class="agreement form-group">
+        <input type="hidden" name="check[]" value="" />
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="check[]" id="check" class="check" checked>
+              Я даю свое согласие на обработку персональных данных
+            </label>
+          </div>
+        </div>
+        <span class="col-sm-offset-2 col-sm-10 error_check"></span>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="reset" class="btn btn-default">Отмена</button>
+			<button type="submit" class="btn btn-primary">Отправить</button>
+		</div>
+	</div>
+	
+</form>
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="successModalLabel">Спасибо</h4>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+      AjaxForm.Message.success = function() {};
+  });
+  $(document).on('af_complete', function(event, response) {
+      var form = response.form;
+      if (response.success) {
+        form.parents('.modal').modal('hide');
+        $('#successModal .modal-body').html(response.message);
+        $('#successModal').modal('show');
+      }
+  });
+</script>

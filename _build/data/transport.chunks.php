@@ -17,6 +17,26 @@ $tmp = array(
         'file' => 'child_list',
         'description' => ''
     ),
+    'header' => array(
+        'file' => 'header',
+        'description' => ''
+    ),
+    'footer' => array(
+        'file' => 'footer',
+        'description' => ''
+    ),
+    'contact_form' => array(
+        'file' => 'contact_form',
+        'description' => ''
+    ),
+    'form.contact_form' => array(
+        'file' => 'form_contact_form',
+        'description' => ''
+    ),
+    'tpl.contact_form' => array(
+        'file' => 'tpl_contact_form',
+        'description' => ''
+    ),
 );
 $setted = false;
 foreach ($tmp as $k => $v) {

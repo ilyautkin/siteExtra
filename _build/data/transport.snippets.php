@@ -9,6 +9,10 @@ $tmp = array(
         'file' => 'year',
         'description' => ''
     ),
+    'contacts_id' => array(
+        'file' => 'contacts_id',
+        'description' => ''
+    ),
 );
 
 foreach ($tmp as $k => $v) {

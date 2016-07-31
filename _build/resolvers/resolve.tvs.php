@@ -13,7 +13,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         if (isset($_SESSION['site_category']) && $_SESSION['site_category']) {
             if ($category = $modx->getObject('modCategory', array('category' => $_SESSION['site_category']))) {
                 $cat_id = $category->get('id');
-                unset($_SESSION['site_category']);
             } else {
                 $cat_id = 0;
             }
