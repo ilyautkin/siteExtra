@@ -1,22 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <base href="[[++site_url]]">
-  [[*searchable:eq=`1`:then=``:else=`<meta name="robots" content="noindex, nofollow"/>`]]
-  <title>[[*pagetitle]]</title>
-  <meta name="description" content="[[*introtext:replace=` "== «`:replace=`"==»`]]">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  [[MinifyX? 
-    &minifyCss=`1`
-    &minifyJs=`1`
-    &cssSources=`css/style.css, css/forms.css, css/paginations.css`
-    &jsSources=`js/scripts.js`
-  ]]
-  [[+MinifyX.css]]
+[[$head]]
 </head>
 <body>
 <header>

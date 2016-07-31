@@ -99,6 +99,7 @@ class siteBuilder {
         
         $this->addPlugins($category);
         $this->addTemplates($category);
+        $this->addChunks($category);
         
         $vehicle = $builder->createVehicle($category, $this->category_attr);
         $this->addResolvers($vehicle);
@@ -141,6 +142,24 @@ class siteBuilder {
             $category->addMany($templates);
             $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($templates) . ' templates.');
             $first = array_shift($templates);
+            $_SESSION['site_template_name'] = $first->get('templatename');
+        }
+    }
+    
+    public function addChunks(&$category) {
+        $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Chunks'] = array(
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'name',
+        );
+        $modx = &$this->modx;
+        $chunks = include $this->config['PACKAGE_ROOT'] . '_build/data/transport.chunks.php';
+        if (!is_array($chunks)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in chunks.');
+        } else {
+            $category->addMany($chunks);
+            $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($chunks) . ' chunks.');
+            $first = array_shift($chunks);
             $_SESSION['site_template_name'] = $first->get('templatename');
         }
     }

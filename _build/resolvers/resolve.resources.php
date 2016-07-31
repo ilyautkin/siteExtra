@@ -77,7 +77,14 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         /* HTML карта сайта */
         $alias = 'site-map';
         $parent = 0;
-        $templateId = $modx->getOption('default_template');
+        if (isset($_SESSION['site_template_name']) && !empty($_SESSION['site_template_name'])) {
+            $template = $modx->getObject('modTemplate', array('templatename' => $_SESSION['site_template_name']));
+        }
+        if ($template) {
+            $templateId = $template->get('id');
+        } else {
+            $templateId = $modx->getOption('default_template');
+        }
         if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
             $resource = $modx->newObject('modResource');
         }
@@ -112,7 +119,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         /* 404 */
         $alias = '404';
         $parent = 0;
-        $templateId = 0;
         if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
             $resource = $modx->newObject('modResource');
         }
@@ -129,7 +135,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'hidemenu'     => 1,
             'richtext'     => 0,
             'parent'       => $parent,
-            'template'     => $modx->getOption('default_template'),
+            'template'     => $templateId,
             'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
                 <div style='width: 500px; margin: -30px auto 0; overflow: hidden;padding-top: 25px;'>
                     <div style='float: left; width: 100px; margin-right: 50px; font-size: 75px;margin-top: 45px;'>404</div>

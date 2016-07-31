@@ -30,7 +30,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 $site_start->set('template', $template->get('id'));
                 $site_start->save();
             }
-            unset($_SESSION['site_template_name']);
         }
         break;
     case xPDOTransport::ACTION_UNINSTALL:
