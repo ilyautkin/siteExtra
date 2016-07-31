@@ -1,3 +1,9 @@
+1.1.5-beta
+==============
+- Bootstrap template
+- Content for resources
+- MIGX Gallery & Fancybox
+
 1.1.4-beta
 ==============
 - Add snippets

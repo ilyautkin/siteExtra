@@ -128,7 +128,6 @@ switch (@$options[xPDOTransport::PACKAGE_ACTION]) {
 		/* Checking and installing required packages */
 		$providers = array(
 		    array('name' => '', 'packages' => array(
-		            'VersionX' => '2.1.3-pl',
 		            'simpleUpdater' => '0.1.0-beta',
 		            'FormIt' => '2.2.10-pl',
 		            'autoRedirector' => '0.1.0-beta',
@@ -137,7 +136,8 @@ switch (@$options[xPDOTransport::PACKAGE_ACTION]) {
 		            'Console' => '2.1.0-beta',
 		            'FastUploadTV' => '1.0.0-beta2',
 		            'MIGX' => '2.9.6-pl',
-		            'translit' => '1.0.0-beta'
+		            'translit' => '1.0.0-beta',
+		            'VersionX' => '2.1.3-pl'
 		        )),
 		    array('name' => 'modstore.pro', 'packages' => array(
 		            'Ace' => '1.6.5-pl',
@@ -145,7 +145,8 @@ switch (@$options[xPDOTransport::PACKAGE_ACTION]) {
 		            'AjaxForm' => '1.1.5-pl',
 		            'MinifyX' => '1.4.4-pl',
 		            'phpThumbOn' => '1.3.1-pl',
-		            'tagElementPlugin' => '1.1.3-pl'
+		            'tagElementPlugin' => '1.1.3-pl',
+		            'FileAttach' => '1.0.8-pl1'
 		        )),
 	    );
 	    

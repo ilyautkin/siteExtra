@@ -37,6 +37,10 @@ $tmp = array(
         'file' => 'tpl_contact_form',
         'description' => ''
     ),
+    'tpl.gallery' => array(
+        'file' => 'tpl_gallery',
+        'description' => ''
+    ),
 );
 $setted = false;
 foreach ($tmp as $k => $v) {

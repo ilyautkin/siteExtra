@@ -279,8 +279,10 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         /* Галерея */
         $alias = 'gallery';
         $parent = 0;
+        $addPhotos = false;
         if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
             $resource = $modx->newObject('modResource');
+            $addPhotos = true;
         }
         $resource->fromArray(array(
             'class_key'    => 'modDocument',
@@ -300,6 +302,15 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
+        if ($addPhotos) {
+            $resource->setTVValue('gallery', $modx->toJSON(
+                    array(
+                        array('MIGX_id' => 1, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal1.jpg', 'title' => 'Фото 1'),
+                        array('MIGX_id' => 2, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal2.jpg', 'title' => 'Фото 2'),
+                        array('MIGX_id' => 3, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal3.jpg', 'title' => 'Фото 3'),
+                    )
+                ));
+        }
 
         /* Новости */
         $alias = 'news';

@@ -15,5 +15,5 @@ $resolvers = array(
     'tvs',
     'manager_customisation'
 );
-$builder = new siteBuilder('site', '1.1.4', 'beta', $resolvers);
+$builder = new siteBuilder('site', '1.1.5', 'beta', $resolvers);
 $builder->build();

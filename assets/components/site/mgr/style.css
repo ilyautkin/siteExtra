@@ -6,3 +6,5 @@
 #fastuploadtv1 div div:last-child img {position: absolute; left: 190px; top: -35px; background: #fff; padding: 3px; border-radius: 4px;}
 #modx-resource-main-columns .x-form-item.modx-tv {padding-left: 0 !important;}
 #modx-resource-main-columns .modx-tv-form-element input {padding: 5px 1% !important; width: 98% !important;}
+#modx-resource-main-columns .tv_modx-grid-multitvgrid_items .x-grid3-body,
+#modx-resource-main-columns .x-grid3-row {width: 100% !important;}

@@ -11,6 +11,7 @@
       <article class="col-sm-8">
         <h1>[[*longtitle:default=`[[*pagetitle]]`]]</h1>
         <div id="content">[[*content]]</div>
+        <div class="row">[[getImageList? &value=`[[*gallery]]` &tpl=`tpl.gallery`]]</div>
         [[[[*show_child:eq=`1`:then=`$child_list`:else=`--`]]]]
       </article>
       <aside class="col-sm-4">
