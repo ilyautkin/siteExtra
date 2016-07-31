@@ -10,12 +10,13 @@
     <section class="row">
       <article class="col-sm-8">
         <h1>[[*longtitle:default=`[[*pagetitle]]`]]</h1>
-        <div id="content">[[*content]]</div>
-        <div class="row">[[getImageList? &value=`[[*gallery]]` &tpl=`tpl.gallery`]]</div>
+        [[*content]]
+        [[[[*gallery:neq=``:then=`$gallery`:else=`--`]]]]
         [[[[*show_child:eq=`1`:then=`$child_list`:else=`--`]]]]
+        [[[[*id:eq=`[[++site_start]]`:then=`$block.gallery`:else=`--`]]]]
       </article>
       <aside class="col-sm-4">
-        
+        [[$aside]]
       </aside>
     </section>
     [[$footer]]

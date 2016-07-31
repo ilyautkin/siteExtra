@@ -1,0 +1,46 @@
+<br><hr>
+[[pdoResources?
+    &parents=`[[++site_news_id]]`
+    &limit=`3`
+    &tpl=`@INLINE <div class="media">
+          {if $img}
+          <div class="media-left">
+            <a href="{$uri}" title="{$longtitle}">
+              <img class="media-object" src="{$img | phpthumbon : "w=60&h=60&zc=1"}" alt="{$pagetitle}">
+            </a>
+          </div>
+          {/if}
+          <div class="media-body">
+            <h4 class="media-heading"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></h4>
+            <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {$publishedon | date_format : "%d.%m.%Y г."}</p>
+            <small>{$content | striptags | ellipsis : "110"}</small>
+          </div>
+        </div>`
+    &includeContent=`1`
+    &includeTVs=`img`
+    &tvPrefix=``
+]]
+<br><hr>
+<h3><a href="[[~[[++site_specs_id]]]]">Наши специалисты</a></h3>
+<br>
+[[pdoResources?
+    &parents=`[[++site_specs_id]]`
+    &limit=`3`
+    &sortby=`{"menuindex":"ASC"}`
+    &tpl=`@INLINE <div class="media">
+          {if $img}
+          <div class="media-left">
+            <a href="{$uri}" title="{$longtitle}">
+              <img class="media-object" src="{$img | phpthumbon : "w=60&h=60&zc=1"}" alt="{$pagetitle}">
+            </a>
+          </div>
+          {/if}
+          <div class="media-body">
+            <h4 class="media-heading"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></h4>
+            <small>{$content | striptags | ellipsis : "110"}</small>
+          </div>
+        </div>`
+    &includeContent=`1`
+    &includeTVs=`img`
+    &tvPrefix=``
+]]

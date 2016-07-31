@@ -31,6 +31,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '.txt',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 1,
             'richtext'     => 0,
             'parent'       => $parent,
@@ -65,6 +66,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '.xml',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 1,
             'richtext'     => 0,
             'parent'       => $parent,
@@ -103,6 +105,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '/',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 1,
             'richtext'     => 0,
             'parent'       => $parent,
@@ -143,6 +146,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '/',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 0,
             'richtext'     => 1,
             'parent'       => $parent,
@@ -168,6 +172,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '/',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 0,
             'richtext'     => 1,
             'parent'       => $parent,
@@ -177,6 +182,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
+        
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_specs_id'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'site',
+            'xtype'     => 'textfield',
+            'value'     => $resource->get('id'),
+            'key'       => 'site_specs_id',
+        ), '', true, true);
+        $tmp->save();
         
         if ($addspecs) {
             $specParent = $resource->get('id');
@@ -195,6 +212,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'uri'          => $alias . '.html',
                     'uri_override' => 0,
                     'published'    => 1,
+                    'publishedon'  => strtotime('now') - 60 * 60 * $i,
                     'hidemenu'     => 0,
                     'richtext'     => 1,
                     'parent'       => $specParent,
@@ -226,6 +244,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '/',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 0,
             'richtext'     => 1,
             'parent'       => $parent,
@@ -235,6 +254,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
+        
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_reviews_id'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'site',
+            'xtype'     => 'textfield',
+            'value'     => $resource->get('id'),
+            'key'       => 'site_reviews_id',
+        ), '', true, true);
+        $tmp->save();
         
         if ($addReviews) {
             $reviewParent = $resource->get('id');
@@ -266,6 +297,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'uri'          => $alias . '.html',
                     'uri_override' => 0,
                     'published'    => 1,
+                    'publishedon'  => time() - 60 * 60 * $i,
                     'hidemenu'     => 0,
                     'richtext'     => 1,
                     'parent'       => $reviewParent,
@@ -293,6 +325,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '/',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 0,
             'richtext'     => 1,
             'parent'       => $parent,
@@ -302,12 +335,28 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
+        
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_gallery_id'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'site',
+            'xtype'     => 'textfield',
+            'value'     => $resource->get('id'),
+            'key'       => 'site_gallery_id',
+        ), '', true, true);
+        $tmp->save();
+        
         if ($addPhotos) {
             $resource->setTVValue('gallery', $modx->toJSON(
                     array(
                         array('MIGX_id' => 1, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal1.jpg', 'title' => 'Фото 1'),
                         array('MIGX_id' => 2, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal2.jpg', 'title' => 'Фото 2'),
                         array('MIGX_id' => 3, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal3.jpg', 'title' => 'Фото 3'),
+                        array('MIGX_id' => 4, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal4.jpg', 'title' => 'Фото 4'),
+                        array('MIGX_id' => 5, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal5.jpg', 'title' => 'Фото 5'),
+                        array('MIGX_id' => 6, 'img' => $modx->getOption('assets_url') . 'components/' . $_SESSION['site_category'] . '/web/img/gal6.jpg', 'title' => 'Фото 6'),
                     )
                 ));
         }
@@ -330,6 +379,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '/',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 0,
             'richtext'     => 1,
             'parent'       => $parent,
@@ -339,6 +389,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
+        
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_news_id'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'site',
+            'xtype'     => 'textfield',
+            'value'     => $resource->get('id'),
+            'key'       => 'site_news_id',
+        ), '', true, true);
+        $tmp->save();
         
         if ($addNews) {
             $newsParent = $resource->get('id');
@@ -364,6 +426,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'uri'          => $alias . '.html',
                     'uri_override' => 0,
                     'published'    => 1,
+                    'publishedon'  => time() - 60 * 60 * $i,
                     'hidemenu'     => 0,
                     'richtext'     => 1,
                     'parent'       => $newsParent,
@@ -389,6 +452,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '/',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 0,
             'richtext'     => 0,
             'parent'       => $parent,
@@ -401,6 +465,19 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ')
         ));
         $resource->save();
+        
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_contacts_id'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'site',
+            'xtype'     => 'textfield',
+            'value'     => $resource->get('id'),
+            'key'       => 'site_contacts_id',
+        ), '', true, true);
+        $tmp->save();
+        
         if (!$resource->getTVValue('address')) {
             $resource->setTVValue('address', 'г. Москва, ул. Печатников, д. 17, оф. 350');
         }
@@ -427,6 +504,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri'          => $alias . '/',
             'uri_override' => 0,
             'published'    => 1,
+            'publishedon'  => time(),
             'hidemenu'     => 1,
             'richtext'     => 0,
             'parent'       => $parent,

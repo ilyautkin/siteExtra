@@ -146,7 +146,7 @@ switch (@$options[xPDOTransport::PACKAGE_ACTION]) {
 		            'MinifyX' => '1.4.4-pl',
 		            'phpThumbOn' => '1.3.1-pl',
 		            'tagElementPlugin' => '1.1.3-pl',
-		            'FileAttach' => '1.0.8-pl1'
+		            'frontendManager' => '1.0.8-beta'
 		        )),
 	    );
 	    

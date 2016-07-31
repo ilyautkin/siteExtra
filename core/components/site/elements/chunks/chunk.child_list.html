@@ -1,6 +1,9 @@
 <br>
 <div id="child_list">
+  <div class="rows">
   [[!pdoPage?
+    &ajaxMode=`default`
+    
     &tpl=`@INLINE <div class="media">
           {if $img}
           <div class="media-left">
@@ -19,18 +22,18 @@
     &tvPrefix=``
     &includeContent=`1`
     
-    &tplPageWrapper=`@INLINE <ul class="pagination pagination-lg">[[+prev]] [[+pages]] [[+next]]</ul>`
-    &tplPage=`@INLINE <li><a href="[[+href]]#child_list">[[+pageNo]]</a></li>`
-    &tplPageActive=`@INLINE <li class="active"><a href="[[+href]]#child_list">[[+pageNo]]</a></li>`
-    &tplPagePrev=`@INLINE <li rel="prev"><a[[+classes]][[+title]] href="[[+href]]#child_list">« Назад</a></li>`
-    &tplPageNext=`@INLINE <li rel="next"><a[[+classes]][[+title]] href="[[+href]]#child_list">Дальше »</a></li>`
-    &tplPageFirst=`@INLINE `
-    &tplPageLast=`@INLINE `
-    
-    &tplPageFirstEmpty=`@INLINE `
-    &tplPageLastEmpty=`@INLINE `
+    &tplPageWrapper=`@INLINE <div class="pagination"><ul class="pagination pagination-lg">[[+prev]][[+pages]][[+next]]</ul></div>`
+    &tplPage=`@INLINE <li><a href="[[+href]]">[[+pageNo]]</a></li>`
+    &tplPageActive=`@INLINE <li class="active"><a href="[[+href]]">[[+pageNo]]</a></li>`
+    &tplPagePrev=`@INLINE <li rel="prev"><a href="[[+href]]">« Назад</a></li>`
+    &tplPageNext=`@INLINE <li rel="next"><a href="[[+href]]">Дальше »</a></li>`
     &tplPagePrevEmpty=`@INLINE `
     &tplPageNextEmpty=`@INLINE `
+    &ajaxElemWrapper=`#child_list`
+    &ajaxElemRows=`#child_list .rows`
+    &ajaxElemPagination=`#child_list .pagination`
+    &ajaxElemLink=`#child_list .pagination a`
   ]]
+  </div>
+  [[!+page.nav]]
 </div>
-[[!+page.nav]]
