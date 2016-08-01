@@ -1,3 +1,7 @@
+1.1.9-beta
+==============
+- Fix 404 setting
+
 1.1.8-beta
 ==============
 - Customize specs list

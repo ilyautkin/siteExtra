@@ -6,14 +6,13 @@ $resolvers = array(
     'rename_htaccess',
     'remove_changelog',
     'cache_options',
-    'settings',
-    'fix_translit',
-    'fix_fastuploadtv',
-    'fix_directresize',
     'template',
     'tvs',
     'resources',
+    'settings',
+    'fix_translit',
+    'fix_fastuploadtv',
     'manager_customisation'
 );
-$builder = new siteBuilder('site', '1.1.8', 'beta', $resolvers);
+$builder = new siteBuilder('site', '1.1.9', 'beta', $resolvers);
 $builder->build();
