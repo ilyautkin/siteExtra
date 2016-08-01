@@ -1,3 +1,8 @@
+1.1.7-beta
+==============
+- Images optimized
+- Fix template & category setting
+
 1.1.6-beta
 ==============
 - Aside and mainpage

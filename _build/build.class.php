@@ -91,7 +91,6 @@ class siteBuilder {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, 'Created category.');
         $category = $this->modx->newObject('modCategory');
         $category->set('category', $this->config['PACKAGE_NAME']);
-        $_SESSION['site_category'] = $this->config['PACKAGE_NAME'];
         
         $this->category_attr[xPDOTransport::UNIQUE_KEY] = 'category';
         $this->category_attr[xPDOTransport::PRESERVE_KEYS] = false;
@@ -103,6 +102,10 @@ class siteBuilder {
         $this->addTemplates($category);
         $this->addChunks($category);
         
+        $builder->setPackageAttributes(array(
+            'site_category' => $this->config['PACKAGE_NAME'],
+            'site_template_name' => $this->config['site_template_name']
+        ));
         $vehicle = $builder->createVehicle($category, $this->category_attr);
         $this->addResolvers($vehicle);
         $builder->putVehicle($vehicle);
@@ -160,7 +163,7 @@ class siteBuilder {
             $category->addMany($templates);
             $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($templates) . ' templates.');
             $first = array_shift($templates);
-            $_SESSION['site_template_name'] = $first->get('templatename');
+            $this->config['site_template_name'] = $first->get('templatename');
         }
     }
     
@@ -177,8 +180,6 @@ class siteBuilder {
         } else {
             $category->addMany($chunks);
             $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($chunks) . ' chunks.');
-            $first = array_shift($chunks);
-            $_SESSION['site_template_name'] = $first->get('templatename');
         }
     }
     

@@ -9,9 +9,8 @@ if (!$modx = $object->xpdo AND !$object->xpdo instanceof modX) {
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
-
-        if (isset($_SESSION['site_category']) && $_SESSION['site_category']) {
-            if ($category = $modx->getObject('modCategory', array('category' => $_SESSION['site_category']))) {
+        if (isset($options['site_category']) && $options['site_category']) {
+            if ($category = $modx->getObject('modCategory', array('category' => $options['site_category']))) {
                 $cat_id = $category->get('id');
             } else {
                 $cat_id = 0;

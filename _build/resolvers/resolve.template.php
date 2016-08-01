@@ -9,9 +9,9 @@ if (!$modx = $object->xpdo AND !$object->xpdo instanceof modX) {
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
-        if (isset($_SESSION['site_template_name']) && !empty($_SESSION['site_template_name'])) {
+        if (isset($options['site_template_name']) && !empty($options['site_template_name'])) {
             
-            $template = $modx->getObject('modTemplate', array('templatename' => $_SESSION['site_template_name']));
+            $template = $modx->getObject('modTemplate', array('templatename' => $options['site_template_name']));
             
             if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'default_template'))) {
                 $tmp = $modx->newObject('modSystemSetting');
