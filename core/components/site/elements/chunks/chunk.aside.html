@@ -23,24 +23,44 @@
 <br><hr>
 <h3><a href="[[~[[++site_specs_id]]]]">Наши специалисты</a></h3>
 <br>
-[[pdoResources?
-    &parents=`[[++site_specs_id]]`
-    &limit=`3`
-    &sortby=`{"menuindex":"ASC"}`
-    &tpl=`@INLINE <div class="media">
-          {if $img}
-          <div class="media-left">
-            <a href="{$uri}" title="{$longtitle}">
-              <img class="media-object" src="{$img | phpthumbon : "w=60&h=60&zc=1"}" alt="{$pagetitle}">
-            </a>
-          </div>
-          {/if}
-          <div class="media-body">
-            <h4 class="media-heading"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></h4>
-            <small>{$content | striptags | ellipsis : "110"}</small>
-          </div>
-        </div>`
-    &includeContent=`1`
-    &includeTVs=`img`
-    &tvPrefix=``
-]]
+<div class="row">
+    [[pdoResources?
+        &parents=`[[++site_specs_id]]`
+        &limit=`2`
+        &sortby=`{"menuindex":"ASC"}`
+        &tpl=`@INLINE <div class="col-md-6">
+            <div class="thumbnail">
+              <a href="{$uri}" title="{$longtitle}">
+                  <img src="{$img | phpthumbon : "w=155&h=155&zc=1"}" alt="{$pagetitle}">
+              </a>
+              <div class="caption">
+                <p class="text-center"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></p>
+              </div>
+            </div>
+          </div>`
+        &includeContent=`1`
+        &includeTVs=`img`
+        &tvPrefix=``
+    ]]
+    <div class="hidden-sm hidden-xs">
+        [[pdoResources?
+            &parents=`[[++site_specs_id]]`
+            &limit=`2`
+            &offset=`2`
+            &sortby=`{"menuindex":"ASC"}`
+            &tpl=`@INLINE <div class="col-md-6">
+                <div class="thumbnail">
+                  <a href="{$uri}" title="{$longtitle}">
+                      <img src="{$img | phpthumbon : "w=155&h=155&zc=1"}" alt="{$pagetitle}">
+                  </a>
+                  <div class="caption">
+                    <p class="text-center"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></p>
+                  </div>
+                </div>
+              </div>`
+            &includeContent=`1`
+            &includeTVs=`img`
+            &tvPrefix=``
+        ]]
+    </div>
+</div>

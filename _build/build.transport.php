@@ -15,5 +15,5 @@ $resolvers = array(
     'resources',
     'manager_customisation'
 );
-$builder = new siteBuilder('site', '1.1.7', 'beta', $resolvers);
+$builder = new siteBuilder('site', '1.1.8', 'beta', $resolvers);
 $builder->build();

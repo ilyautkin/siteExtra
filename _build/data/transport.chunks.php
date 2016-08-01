@@ -21,6 +21,10 @@ $tmp = array(
         'file' => 'header',
         'description' => ''
     ),
+    'content' => array(
+        'file' => 'content',
+        'description' => ''
+    ),
     'aside' => array(
         'file' => 'aside',
         'description' => ''
@@ -39,6 +43,10 @@ $tmp = array(
     ),
     'tpl.contact_form' => array(
         'file' => 'tpl_contact_form',
+        'description' => ''
+    ),
+    'specialists' => array(
+        'file' => 'specialists',
         'description' => ''
     ),
     'gallery' => array(

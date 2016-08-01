@@ -47,17 +47,6 @@
 	
 </form>
 
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title" id="successModalLabel">Спасибо</h4>
-      </div>
-      <div class="modal-body"></div>
-    </div>
-  </div>
-</div>
 <script>
   $(document).ready(function() {
       AjaxForm.Message.success = function() {};
@@ -65,9 +54,8 @@
   $(document).on('af_complete', function(event, response) {
       var form = response.form;
       if (response.success) {
-        form.parents('.modal').modal('hide');
-        $('#successModal .modal-body').html(response.message);
-        $('#successModal').modal('show');
+          $.fancybox.close();
+          $.fancybox(response.message);
       }
   });
 </script>

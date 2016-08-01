@@ -17,11 +17,11 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $set = array('profile' => $profile->id);
         $set_list = array();
         if (!$set_list['create_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create'), $set))) {
-            $set_list['create_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create', 'active' => true), $set));
+            $set_list['create_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create', 'description' => 'Правила для новых страниц', 'active' => true), $set));
             $set_list['create_set']->save();
         }
         if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update'), $set))) {
-            $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'active' => true), $set));
+            $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'description' => 'Правила для редактирования', 'active' => true), $set));
             $set_list['update_set']->save();
         }
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'img'))) {
@@ -71,12 +71,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $res_id = $contacts->get('id');
             $set_list = array();
             $set = array('profile' => $profile->id);
-            if (!$set_list['create_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource'), $set))) {
-                $set_list['create_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'active' => true), $set));
-                $set_list['create_set']->save();
-            }
             if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource'), $set))) {
-                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'active' => true), $set));
+                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'description' => 'Правила для страницы контактов', 'active' => true), $set));
                 $set_list['update_set']->save();
             }
             if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'phone'))) {
@@ -147,12 +143,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $res_id = $gallery->get('id');
             $set_list = array();
             $set = array('profile' => $profile->id);
-            if (!$set_list['create_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource'), $set))) {
-                $set_list['create_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'active' => true), $set));
-                $set_list['create_set']->save();
-            }
             if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource'), $set))) {
-                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'active' => true), $set));
+                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'description' => 'Правила для страницы галереи', 'active' => true), $set));
                 $set_list['update_set']->save();
             }
             if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'gallery'))) {

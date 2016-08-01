@@ -174,12 +174,12 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'published'    => 1,
             'publishedon'  => time(),
             'hidemenu'     => 0,
-            'richtext'     => 1,
+            'richtext'     => 0,
             'parent'       => $parent,
             'template'     => $templateId,
-            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
-                <p></p>
-            ")
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', '
+                [[$specialists]]
+            ')
         ));
         $resource->save();
         
@@ -196,6 +196,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $tmp->save();
         
         if ($addspecs) {
+            $resource->setTVValue('show_child', '');
             $specParent = $resource->get('id');
             for ($i = 1; $i <= 5; $i++) {
                 /* Специалист 1 */

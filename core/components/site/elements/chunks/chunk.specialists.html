@@ -1,24 +1,21 @@
 <br>
 <div id="child_list">
-  <div class="rows">
+  <div class="rows row">
   [[!pdoPage?
     &ajaxMode=`default`
     
-    &tpl=`@INLINE <div class="media">
-          {if $img}
-          <div class="media-left">
-            <a href="{$uri}" title="{$longtitle}">
-              <img class="media-object" src="{$img | phpthumbon : "w=120&h=90&zc=1"}" alt="{$pagetitle}">
-            </a>
+    &tpl=`@INLINE <div class="col-xs-6 col-md-4">
+        <div class="thumbnail">
+          <a href="{$uri}" title="{$longtitle}">
+              <img src="{$img | phpthumbon : "w=220&h=160&zc=1"}" alt="{$pagetitle}">
+          </a>
+          <div class="caption">
+            <h4 class="text-center"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></h4>
           </div>
-          {/if}
-          <div class="media-body">
-            <h4 class="media-heading"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></h4>
-            <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {$publishedon | date_format : "%d.%m.%Y г."}</p>
-            {$content | striptags | ellipsis : "250"}
-          </div>
-        </div>`
+        </div>
+      </div>`
     &limit=`15`
+    &sortby=`{"menuindex":"ASC"}`
     &includeTVs=`img`
     &tvPrefix=``
     &includeContent=`1`
