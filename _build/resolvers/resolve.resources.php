@@ -223,7 +223,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     ")
                 ));
                 $resource->save();
-                $resource->setTVValue('img', $modx->getOption('assets_url') . 'components/' . $options['site_category'] . '/web/img/spec' . $i . '.png');
+                $resource->setTVValue('img', $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/spec' . $i . '.png');
             }
         }
 
@@ -352,12 +352,12 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         if ($addPhotos) {
             $resource->setTVValue('gallery', $modx->toJSON(
                     array(
-                        array('MIGX_id' => 1, 'img' => $modx->getOption('assets_url') . 'components/' . $options['site_category'] . '/web/img/gal1.jpg', 'title' => 'Фото 1'),
-                        array('MIGX_id' => 2, 'img' => $modx->getOption('assets_url') . 'components/' . $options['site_category'] . '/web/img/gal2.jpg', 'title' => 'Фото 2'),
-                        array('MIGX_id' => 3, 'img' => $modx->getOption('assets_url') . 'components/' . $options['site_category'] . '/web/img/gal3.jpg', 'title' => 'Фото 3'),
-                        array('MIGX_id' => 4, 'img' => $modx->getOption('assets_url') . 'components/' . $options['site_category'] . '/web/img/gal4.jpg', 'title' => 'Фото 4'),
-                        array('MIGX_id' => 5, 'img' => $modx->getOption('assets_url') . 'components/' . $options['site_category'] . '/web/img/gal5.jpg', 'title' => 'Фото 5'),
-                        array('MIGX_id' => 6, 'img' => $modx->getOption('assets_url') . 'components/' . $options['site_category'] . '/web/img/gal6.jpg', 'title' => 'Фото 6'),
+                        array('MIGX_id' => 1, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal1.jpg', 'title' => 'Фото 1'),
+                        array('MIGX_id' => 2, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal2.jpg', 'title' => 'Фото 2'),
+                        array('MIGX_id' => 3, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal3.jpg', 'title' => 'Фото 3'),
+                        array('MIGX_id' => 4, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal4.jpg', 'title' => 'Фото 4'),
+                        array('MIGX_id' => 5, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal5.jpg', 'title' => 'Фото 5'),
+                        array('MIGX_id' => 6, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal6.jpg', 'title' => 'Фото 6'),
                     )
                 ));
         }
