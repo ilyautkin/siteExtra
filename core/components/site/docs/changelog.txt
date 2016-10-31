@@ -1,3 +1,13 @@
+1.2.1-beta
+==============
+- Right URIs for children
+- Plugin "siteRedirect" disabled
+- Prefix for img TV
+- Excludes for sitemap.xml
+- Http_host to robots.txt
+- Comma excludes from URIs (settings)
+- Path for CSS-file in plugin
+
 1.2.0-beta
 ==============
 - Added site_folder_name for customize extra

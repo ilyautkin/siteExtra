@@ -45,39 +45,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 User-agent: *
                 Allow: /
                 
-                Host: [[++site_url:replace=`http://== `:replace=`/== `]]
+                Host: [[++http_host]]
                 Sitemap: [[++site_url]]sitemap.xml
-            ")
-        ));
-        $resource->save();
-
-        /* sitemap.xml */
-        $alias = 'sitemap';
-        $parent = 0;
-        $templateId = 0;
-        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
-            $resource = $modx->newObject('modResource');
-        }
-        $resource->fromArray(array(
-            'class_key'    => 'modDocument',
-            'menuindex'    => 1011,
-            'pagetitle'    => $alias . '.xml',
-            'alias'        => $alias,
-            'uri'          => $alias . '.xml',
-            'uri_override' => 0,
-            'published'    => 1,
-            'publishedon'  => time(),
-            'hidemenu'     => 1,
-            'richtext'     => 0,
-            'parent'       => $parent,
-            'template'     => $templateId,
-
-            'searchable'   => 0,
-            'content_type' => 2,
-            'contentType'  => 'text/xml',
-
-            'content' => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
-                [[pdoSitemap? &showHidden=`1`]]
             ")
         ));
         $resource->save();
@@ -182,6 +151,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ')
         ));
         $resource->save();
+        $specAlias = $alias;
         
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_specs_id'))) {
             $tmp = $modx->newObject('modSystemSetting');
@@ -210,7 +180,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'pagetitle'    => 'Сотрудник ' . $i,
                     'isfolder'     => 0,
                     'alias'        => $alias,
-                    'uri'          => $alias . '.html',
+                    'uri'          => $specAlias . '/' . $alias . '.html',
                     'uri_override' => 0,
                     'published'    => 1,
                     'publishedon'  => time() - 60 * 60 * $i,
@@ -255,6 +225,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
+        $reviewsAlias = $alias;
         
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_reviews_id'))) {
             $tmp = $modx->newObject('modSystemSetting');
@@ -295,7 +266,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'pagetitle'    => 'Отзыв ' . $i,
                     'isfolder'     => 0,
                     'alias'        => $alias,
-                    'uri'          => $alias . '.html',
+                    'uri'          => $reviewsAlias . '/' . $alias . '.html',
                     'uri_override' => 0,
                     'published'    => 1,
                     'publishedon'  => time() - 60 * 60 * $i,
@@ -390,6 +361,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
+        $newsAlias = $alias;
         
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_news_id'))) {
             $tmp = $modx->newObject('modSystemSetting');
@@ -424,7 +396,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'pagetitle'    => 'Новость ' . $i,
                     'isfolder'     => 0,
                     'alias'        => $alias,
-                    'uri'          => $alias . '.html',
+                    'uri'          => $newsAlias . '/' . $alias . '.html',
                     'uri_override' => 0,
                     'published'    => 1,
                     'publishedon'  => time() - 60 * 60 * $i,
@@ -525,6 +497,38 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                         </ul>
                     </div>
                 </div>
+            ")
+        ));
+        $resource->save();
+        $res404 = $resource->get('id');
+
+        /* sitemap.xml */
+        $alias = 'sitemap';
+        $parent = 0;
+        $templateId = 0;
+        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+            $resource = $modx->newObject('modResource');
+        }
+        $resource->fromArray(array(
+            'class_key'    => 'modDocument',
+            'menuindex'    => 1011,
+            'pagetitle'    => $alias . '.xml',
+            'alias'        => $alias,
+            'uri'          => $alias . '.xml',
+            'uri_override' => 0,
+            'published'    => 1,
+            'publishedon'  => time(),
+            'hidemenu'     => 1,
+            'richtext'     => 0,
+            'parent'       => $parent,
+            'template'     => $templateId,
+
+            'searchable'   => 0,
+            'content_type' => 2,
+            'contentType'  => 'text/xml',
+
+            'content' => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                [[pdoSitemap? &showHidden=`1` &resources=`-'.$res404.'`]]
             ")
         ));
         $resource->save();

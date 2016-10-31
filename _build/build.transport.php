@@ -14,5 +14,5 @@ $resolvers = array(
     'fix_fastuploadtv',
     'manager_customisation'
 );
-$builder = new siteBuilder('site', '1.2.0', 'beta', $resolvers);
+$builder = new siteBuilder('site', '1.2.1', 'beta', $resolvers);
 $builder->build();

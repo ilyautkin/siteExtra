@@ -27,6 +27,7 @@ foreach ($tmp as $k => $v) {
     $plugin->fromArray(array(
         'name' => $k,
         'category' => 0,
+        'disabled' => $k == 'siteRedirect' ? 1 : 0,
         'description' => @$v['description'],
         'plugincode' => getSnippetContent($this->config['PACKAGE_ROOT'] . 'core/components/'.strtolower($this->config['PACKAGE_NAME']).'/elements/plugins/plugin.' . $v['file'] . '.php'),
         'static' => false,

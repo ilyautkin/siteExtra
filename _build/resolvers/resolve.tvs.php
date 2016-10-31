@@ -32,7 +32,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'category'     => $cat_id,
             'input_properties' => array(
                                     "path" => "assets/images/{d}-{m}-{y}/",
-                                    "prefix" => "",
+                                    "prefix" => "{rand}",
                                     "MIME" => "",
                                     "showValue" => false,
                                     "showPreview" => true

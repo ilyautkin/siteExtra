@@ -94,7 +94,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
 
-        /*
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'friendly_alias_restrict_chars_pattern'))) {
             $tmp = $modx->newObject('modSystemSetting');
         }
@@ -102,10 +101,10 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'namespace' => 'core',
             'area'      => 'furls',
             'xtype'     => 'textfield',
-            'value'     => '/[\0\x0B\t\n\r\f\a&=+%<>«»\'\!,$\;\*\(\)\"~:`@\?\[\]\{\}\|\^'\\]/',
+            'value'     => file_get_contents($modx->getOption('core_path') . 'components/' . strtolower($options['site_category'])  . '/docs/friendly_alias_restrict_chars_pattern.txt'),
             'key'       => 'friendly_alias_restrict_chars_pattern',
         ), '', true, true);
-        $tmp->save();*/
+        $tmp->save();
 
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'friendly_alias_translit'))) {
             $tmp = $modx->newObject('modSystemSetting');
