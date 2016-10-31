@@ -528,7 +528,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'contentType'  => 'text/xml',
 
             'content' => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
-                [[pdoSitemap? &showHidden=`1` &resources=`-'.$res404.'`]]
+                [[pdoSitemap? &showHidden=`1` &resources=`-{$res404}`]]
             ")
         ));
         $resource->save();
