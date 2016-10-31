@@ -24,94 +24,94 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $name = 'img';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            $tv->fromArray(array(
+                'name'         => $name,
+                'type'         => 'fastuploadtv',
+                'caption'      => 'Изображение',
+                'category'     => $cat_id,
+                'input_properties' => array(
+                                        "path" => "assets/images/{d}-{m}-{y}/",
+                                        "prefix" => "{rand}-",
+                                        "MIME" => "",
+                                        "showValue" => false,
+                                        "showPreview" => true
+                                    ),
+            ));
+            $tv->save();
+            $tvs[] = $tv->get('id');
         }
-        $tv->fromArray(array(
-            'name'         => $name,
-            'type'         => 'fastuploadtv',
-            'caption'      => 'Изображение',
-            'category'     => $cat_id,
-            'input_properties' => array(
-                                    "path" => "assets/images/{d}-{m}-{y}/",
-                                    "prefix" => "{rand}",
-                                    "MIME" => "",
-                                    "showValue" => false,
-                                    "showPreview" => true
-                                ),
-        ));
-        $tv->save();
-        $tvs[] = $tv->get('id');
         
         $name = 'show_child';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            $tv->fromArray(array(
+                'name'         => $name,
+                'type'         => 'checkbox',
+                'caption'      => 'Отображать на странице',
+                'category'     => $cat_id,
+                'elements'     => 'Дочерние ресурсы==1',
+                'display'      => 'default',
+                'default_text' => '1'
+            ));
+            $tv->save();
+            $tvs[] = $tv->get('id');
         }
-        $tv->fromArray(array(
-            'name'         => $name,
-            'type'         => 'checkbox',
-            'caption'      => 'Отображать на странице',
-            'category'     => $cat_id,
-            'elements'     => 'Дочерние ресурсы==1',
-            'display'      => 'default',
-            'default_text' => '1'
-        ));
-        $tv->save();
-        $tvs[] = $tv->get('id');
         
         $name = 'address';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            $tv->fromArray(array(
+                'name'         => $name,
+                'type'         => 'text',
+                'caption'      => 'Адрес',
+                'category'     => $cat_id
+            ));
+            $tv->save();
+            $tvs[] = $tv->get('id');
         }
-        $tv->fromArray(array(
-            'name'         => $name,
-            'type'         => 'text',
-            'caption'      => 'Адрес',
-            'category'     => $cat_id
-        ));
-        $tv->save();
-        $tvs[] = $tv->get('id');
         
         $name = 'phone';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            $tv->fromArray(array(
+                'name'         => $name,
+                'type'         => 'text',
+                'caption'      => 'Телефон',
+                'category'     => $cat_id
+            ));
+            $tv->save();
+            $tvs[] = $tv->get('id');
         }
-        $tv->fromArray(array(
-            'name'         => $name,
-            'type'         => 'text',
-            'caption'      => 'Телефон',
-            'category'     => $cat_id
-        ));
-        $tv->save();
-        $tvs[] = $tv->get('id');
         
         $name = 'email';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            $tv->fromArray(array(
+                'name'         => $name,
+                'type'         => 'text',
+                'caption'      => 'E-mail',
+                'category'     => $cat_id
+            ));
+            $tv->save();
+            $tvs[] = $tv->get('id');
         }
-        $tv->fromArray(array(
-            'name'         => $name,
-            'type'         => 'text',
-            'caption'      => 'E-mail',
-            'category'     => $cat_id
-        ));
-        $tv->save();
-        $tvs[] = $tv->get('id');
         
         $name = 'gallery';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            $tv->fromArray(array(
+                'name'         => $name,
+                'type'         => 'migx',
+                'caption'      => 'Фотогалерея',
+                'category'     => $cat_id,
+                'input_properties' => array(
+                                        "formtabs" => '[{"caption":"Gallery","fields": [{"field":"img","caption":"Картинка","inputTV":"img"},{"field":"title","caption":"Название"}]}]',
+                                        "columns" => '[{"header": "Картинка","dataIndex": "img","renderer":"this.renderImage","width":"100"},{"header": "Название","dataIndex": "title","width":"400"}]'
+                                    ),
+            ));
+            $tv->save();
+            $tvs[] = $tv->get('id');
         }
-        $tv->fromArray(array(
-            'name'         => $name,
-            'type'         => 'migx',
-            'caption'      => 'Фотогалерея',
-            'category'     => $cat_id,
-            'input_properties' => array(
-                                    "formtabs" => '[{"caption":"Gallery","fields": [{"field":"img","caption":"Картинка","inputTV":"img"},{"field":"title","caption":"Название"}]}]',
-                                    "columns" => '[{"header": "Картинка","dataIndex": "img","renderer":"this.renderImage","width":"100"},{"header": "Название","dataIndex": "title","width":"400"}]'
-                                ),
-        ));
-        $tv->save();
-        $tvs[] = $tv->get('id');
         
         foreach ($modx->getCollection('modTemplate') as $template) {
             $templateId = $template->id;

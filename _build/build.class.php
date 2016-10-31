@@ -152,7 +152,7 @@ class siteBuilder {
     public function addTemplates(&$category) {
         $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Templates'] = array(
             xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::UNIQUE_KEY => 'templatename',
         );
         $modx = &$this->modx;
@@ -170,7 +170,7 @@ class siteBuilder {
     public function addChunks(&$category) {
         $this->category_attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Chunks'] = array(
             xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::UNIQUE_KEY => 'name',
         );
         $modx = &$this->modx;
