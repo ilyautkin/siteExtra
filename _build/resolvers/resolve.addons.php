@@ -134,7 +134,7 @@ switch (@$options[xPDOTransport::PACKAGE_ACTION]) {
 		            'CKEditor' => '1.3.0-pl',
 		            'Collections' => '3.4.2-pl',
 		            'Console' => '2.1.0-beta',
-		            'FastUploadTV' => '1.0.0-beta2',
+		            /* 'FastUploadTV' => '1.0.0-beta2', */
 		            'MIGX' => '2.9.6-pl',
 		            'translit' => '1.0.0-beta',
 		            'VersionX' => '2.1.3-pl'
@@ -146,7 +146,8 @@ switch (@$options[xPDOTransport::PACKAGE_ACTION]) {
 		            'MinifyX' => '1.4.4-pl',
 		            'phpThumbOn' => '1.3.1-pl',
 		            'tagElementPlugin' => '1.1.3-pl',
-		            'frontendManager' => '1.0.8-beta'
+		            'frontendManager' => '1.0.8-beta',
+		            'FastUploadTV' => '1.0.0-pl'
 		        )),
 	    );
 	    

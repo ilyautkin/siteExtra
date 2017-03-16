@@ -45,8 +45,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             }
         }
         
-        if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'show_child'))) {
-            $modx->log(modX::LOG_LEVEL_INFO, 'Faled. TemplateVar <b>show_child</b> not found');
+        if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'show_on_page'))) {
+            $modx->log(modX::LOG_LEVEL_INFO, 'Faled. TemplateVar <b>show_on_page</b> not found');
             return true;
         }
         foreach ($set_list as $set) {

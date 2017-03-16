@@ -1,3 +1,13 @@
+1.2.3-beta
+==============
+- Uncacheable http_host and site_url
+- Added class row for menu
+- Set current year for start parameter of snippet year
+- Added emailFrom to AjaxForm call
+- Script for message in window moved to footer
+- Added show_on_page TV
+- 404 page hide in site map
+
 1.2.2-beta
 ==============
 - Prefix for img separated by dash

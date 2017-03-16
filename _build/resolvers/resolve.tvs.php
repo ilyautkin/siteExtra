@@ -41,7 +41,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tvs[] = $tv->get('id');
         }
         
-        $name = 'show_child';
+        $name = 'show_on_page';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
             $tv->fromArray(array(
@@ -49,9 +49,12 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 'type'         => 'checkbox',
                 'caption'      => 'Отображать на странице',
                 'category'     => $cat_id,
-                'elements'     => 'Дочерние ресурсы==1',
-                'display'      => 'default',
-                'default_text' => '1'
+                'elements'     => 'Дочерние ресурсы==1||Контент==2',
+                'default_text' => '1||2',
+                'display'      => 'delim',
+                'output_properties' => array(
+                                'delimiter' => '||'
+                    )
             ));
             $tv->save();
             $tvs[] = $tv->get('id');

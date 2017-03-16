@@ -5,7 +5,7 @@
 $templates = array();
 
 $tmp = array(
-    'siteTemplate' => array(
+    $this->config['PACKAGE_NAME'] => array(
         'file' => 'sitetemplate',
         'description' => ''
     )

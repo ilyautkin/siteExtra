@@ -10,9 +10,10 @@ $resolvers = array(
     'tvs',
     'resources',
     'settings',
+    'set_start_year',
     'fix_translit',
-    'fix_fastuploadtv',
+    /* 'fix_fastuploadtv', */
     'manager_customisation'
 );
-$builder = new siteBuilder('site', '1.2.2', 'beta', $resolvers);
+$builder = new siteBuilder('site', '1.2.3', 'beta', $resolvers);
 $builder->build();

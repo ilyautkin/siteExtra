@@ -3,6 +3,7 @@
     &form=`form.contact_form`
     &hooks=`email`
   	&emailSubject=`Сообщение с сайта [[++site_url:replace=`http://== `:replace=`https://== `:replace=`/== `]]`
+  	&emailFrom=`[[++emailsender]]`
   	&emailTo=`[[#[[++site_contacts_id]].email]]`
   	&emailTpl=`tpl.contact_form`
     &validate=`name:required,phone:required,check:required`

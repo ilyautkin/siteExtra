@@ -45,15 +45,14 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 User-agent: *
                 Allow: /
                 
-                Host: [[++http_host]]
-                Sitemap: [[++site_url]]sitemap.xml
+                Host: [[!++http_host]]
+                Sitemap: [[!++site_url]]sitemap.xml
             ")
         ));
         $resource->save();
 
-        /* HTML карта сайта */
-        $alias = 'site-map';
-        $parent = 0;
+
+        
         if (isset($options['site_template_name']) && !empty($options['site_template_name'])) {
             $template = $modx->getObject('modTemplate', array('templatename' => $options['site_template_name']));
         }
@@ -62,37 +61,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         } else {
             $templateId = $modx->getOption('default_template');
         }
-        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
-            $resource = $modx->newObject('modResource');
-        }
-        $resource->fromArray(array(
-            'class_key'    => 'modDocument',
-            'menuindex'    => 1000,
-            'pagetitle'    => 'Карта сайта',
-            'isfolder'     => 1,
-            'alias'        => $alias,
-            'uri'          => $alias . '/',
-            'uri_override' => 0,
-            'published'    => 1,
-            'publishedon'  => time(),
-            'hidemenu'     => 1,
-            'richtext'     => 0,
-            'parent'       => $parent,
-            'template'     => $templateId,
-            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
-                [[pdoMenu?
-                    &startId=`0`
-                    &ignoreHidden=`1`
-                    &level=`2`
-                    &outerClass=``
-                    &firstClass=``
-                    &lastClass=``
-                    &hereClass=``
-                    &where=`{\"searchable\":1}`
-                ]]
-            ")
-        ));
-        $resource->save();
 
         /* О компании */
         $alias = 'about';
@@ -166,7 +134,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $tmp->save();
         
         if ($addspecs) {
-            $resource->setTVValue('show_child', '');
+            $resource->setTVValue('show_on_page', '2');
             $specParent = $resource->get('id');
             for ($i = 1; $i <= 5; $i++) {
                 /* Специалист 1 */
@@ -492,7 +460,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                         <h3 style='margin: 15px 0 0;'>Что делать?</h3>
                         <ul style='margin: 5px 0 0 15px;'>
                             <li>проверьте правильность написания адреса,</li>
-                            <li>перейдите на <a href='[[++site_url]]'>главную страницу</a> сайта,</li>
+                            <li>перейдите на <a href='[[!++site_url]]'>главную страницу</a> сайта,</li>
                             <li>или <a href='javascript:history.go(-1);'>вернитесь на предыдущую страницу</a>.</li>
                         </ul>
                     </div>
@@ -501,6 +469,42 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ));
         $resource->save();
         $res404 = $resource->get('id');
+        
+        /* HTML карта сайта */
+        $alias = 'site-map';
+        $parent = 0;
+        if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
+            $resource = $modx->newObject('modResource');
+        }
+        $resource->fromArray(array(
+            'class_key'    => 'modDocument',
+            'menuindex'    => 1000,
+            'pagetitle'    => 'Карта сайта',
+            'isfolder'     => 1,
+            'alias'        => $alias,
+            'uri'          => $alias . '/',
+            'uri_override' => 0,
+            'published'    => 1,
+            'publishedon'  => time(),
+            'hidemenu'     => 1,
+            'richtext'     => 0,
+            'parent'       => $parent,
+            'template'     => $templateId,
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                [[pdoMenu?
+                    &startId=`0`
+                    &ignoreHidden=`1`
+                    &resources=`-".$res404.",-[[*id]]`
+                    &level=`2`
+                    &outerClass=``
+                    &firstClass=``
+                    &lastClass=``
+                    &hereClass=``
+                    &where=`{\"searchable\":1}`
+                ]]
+            ")
+        ));
+        $resource->save();
 
         /* sitemap.xml */
         $alias = 'sitemap';
@@ -532,7 +536,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
-
         break;
     case xPDOTransport::ACTION_UNINSTALL:
         break;

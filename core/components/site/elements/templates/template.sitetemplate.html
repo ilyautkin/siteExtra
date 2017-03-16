@@ -9,7 +9,8 @@
     [[$menu]]
     <section class="row">
       <article class="col-sm-8">
-        [[$content]]
+        [[[[*show_on_page:contain=`2`:eq=`true`:then=`$content`:else=`--`]]]]
+        [[[[*show_on_page:contain=`1`:eq=`true`:then=`$child_list`:else=`--`]]]]
       </article>
       <aside class="col-sm-4">
         [[$aside]]

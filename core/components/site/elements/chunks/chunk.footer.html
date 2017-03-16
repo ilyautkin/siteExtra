@@ -2,7 +2,7 @@
     <hr>
 	<div class="row">
 		<div class="col-xs-6">
-		    <p>&copy; [[!year? &start=`2016`]] [[++site_name]]</p>
+		    <p>&copy; [[!year? &start=``]] [[++site_name]]</p>
 		</div>
 		<div class="col-xs-6">
 			<p class="text-right">
@@ -11,3 +11,16 @@
 		</div>
 	</div>
 </footer>
+
+<script>
+  $(document).ready(function() {
+      AjaxForm.Message.success = function() {};
+  });
+  $(document).on('af_complete', function(event, response) {
+      var form = response.form;
+      if (response.success) {
+          $.fancybox.close();
+          $.fancybox(response.message);
+      }
+  });
+</script>

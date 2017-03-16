@@ -162,8 +162,7 @@ class siteBuilder {
         } else {
             $category->addMany($templates);
             $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($templates) . ' templates.');
-            $first = array_shift($templates);
-            $this->config['site_template_name'] = $first->get('templatename');
+            $this->config['site_template_name'] = $this->config['PACKAGE_NAME'];
         }
     }
     

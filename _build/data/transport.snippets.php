@@ -9,6 +9,10 @@ $tmp = array(
         'file' => 'year',
         'description' => ''
     ),
+    'contain' => array(
+        'file' => 'contain',
+        'description' => ''
+    ),
 );
 
 foreach ($tmp as $k => $v) {
