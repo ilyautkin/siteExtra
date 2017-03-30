@@ -11,16 +11,3 @@
 		</div>
 	</div>
 </footer>
-
-<script>
-  $(document).ready(function() {
-      AjaxForm.Message.success = function() {};
-  });
-  $(document).on('af_complete', function(event, response) {
-      var form = response.form;
-      if (response.success) {
-          $.fancybox.close();
-          $.fancybox(response.message);
-      }
-  });
-</script>
