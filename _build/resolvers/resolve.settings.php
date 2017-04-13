@@ -106,17 +106,19 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
 
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'friendly_alias_translit'))) {
-            $tmp = $modx->newObject('modSystemSetting');
+        if (in_array('translit', $options['install_addons'])) {
+            if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'friendly_alias_translit'))) {
+                $tmp = $modx->newObject('modSystemSetting');
+            }
+            $tmp->fromArray(array(
+                'namespace' => 'core',
+                'area'      => 'furls',
+                'xtype'     => 'textfield',
+                'value'     => 'russian',
+                'key'       => 'friendly_alias_translit',
+            ), '', true, true);
+            $tmp->save();
         }
-        $tmp->fromArray(array(
-            'namespace' => 'core',
-            'area'      => 'furls',
-            'xtype'     => 'textfield',
-            'value'     => 'russian',
-            'key'       => 'friendly_alias_translit',
-        ), '', true, true);
-        $tmp->save();
         
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'resource_tree_node_name'))) {
             $tmp = $modx->newObject('modSystemSetting');
@@ -197,17 +199,19 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
         
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'fastuploadtv.translit'))) {
-            $tmp = $modx->newObject('modSystemSetting');
+        if (in_array('FastUploadTV', $options['install_addons'])) {
+            if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'fastuploadtv.translit'))) {
+                $tmp = $modx->newObject('modSystemSetting');
+            }
+            $tmp->fromArray(array(
+                'namespace' => 'fastuploadtv',
+                'area'      => 'Default',
+                'xtype'     => 'combo-boolean',
+                'value'     => '1',
+                'key'       => 'fastuploadtv.translit',
+            ), '', true, true);
+            $tmp->save();
         }
-        $tmp->fromArray(array(
-            'namespace' => 'fastuploadtv',
-            'area'      => 'Default',
-            'xtype'     => 'combo-boolean',
-            'value'     => '1',
-            'key'       => 'fastuploadtv.translit',
-        ), '', true, true);
-        $tmp->save();
         
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'locale'))) {
             $tmp = $modx->newObject('modSystemSetting');

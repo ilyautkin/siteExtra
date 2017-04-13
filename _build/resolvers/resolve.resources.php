@@ -173,8 +173,13 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $resource = $modx->newObject('modResource');
             $addReviews = true;
         }
+        if (in_array('Collections', $options['install_addons'])) {
+            $collection_type = 'CollectionContainer';
+        } else {
+            $collection_type = 'modDocument';
+        }
         $resource->fromArray(array(
-            'class_key'    => 'CollectionContainer',
+            'class_key'    => $collection_type,
             'menuindex'    => 3,
             'pagetitle'    => 'Отзывы наших клиентов',
             'menutitle'    => 'Отзывы',
@@ -288,7 +293,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
         
-        if ($addPhotos) {
+        if ($addPhotos && in_array('MIGX', $options['install_addons'])) {
             $resource->setTVValue('gallery', $modx->toJSON(
                     array(
                         array('MIGX_id' => 1, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal1.jpg', 'title' => 'Фото 1'),
@@ -309,8 +314,13 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $resource = $modx->newObject('modResource');
             $addNews = true;
         }
+        if (in_array('Collections', $options['install_addons'])) {
+            $collection_type = 'CollectionContainer';
+        } else {
+            $collection_type = 'modDocument';
+        }
         $resource->fromArray(array(
-            'class_key'    => 'CollectionContainer',
+            'class_key'    => $collection_type,
             'menuindex'    => 5,
             'pagetitle'    => 'Новости компании',
             'menutitle'    => 'Новости',

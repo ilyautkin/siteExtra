@@ -126,33 +126,11 @@ switch (@$options[xPDOTransport::PACKAGE_ACTION]) {
 		/* @var modX $modx */
 		$modx = &$object->xpdo;
 		/* Checking and installing required packages */
-		$providers = array(
-		    array('name' => '', 'packages' => array(
-		            'simpleUpdater' => '0.1.0-beta',
-		            'FormIt' => '2.2.10-pl',
-		            'autoRedirector' => '0.1.0-beta',
-		            'CKEditor' => '1.3.0-pl',
-		            'Collections' => '3.4.2-pl',
-		            'Console' => '2.1.0-beta',
-		            /* 'FastUploadTV' => '1.0.0-beta2', */
-		            'MIGX' => '2.9.6-pl',
-		            'translit' => '1.0.0-beta',
-		            'VersionX' => '2.1.3-pl'
-		        )),
-		    array('name' => 'modstore.pro', 'packages' => array(
-		            'Ace' => '1.6.5-pl',
-		            'pdoTools' => '2.5.1-pl',
-		            'AjaxForm' => '1.1.5-pl',
-		            'MinifyX' => '1.4.4-pl',
-		            'phpThumbOn' => '1.3.1-pl',
-		            'tagElementPlugin' => '1.1.3-pl',
-		            'frontendManager' => '1.0.8-beta',
-		            'FastUploadTV' => '1.0.0-pl'
-		        )),
-	    );
-	    
+		$providers = $options['ADDONS'];
+		
 	    foreach ($providers as $provider) {
 	        foreach ($provider['packages'] as $package_name => $version) {
+	            if (!in_array($package_name, $options['install_addons'])) continue;
     			$installed = $modx->getIterator('transport.modTransportPackage', array('package_name' => $package_name));
     			/** @var modTransportPackage $package */
     			foreach ($installed as $package) {

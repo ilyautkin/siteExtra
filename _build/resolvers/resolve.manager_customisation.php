@@ -24,61 +24,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'description' => 'Правила для редактирования', 'active' => true), $set));
             $set_list['update_set']->save();
         }
-        if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'img'))) {
-            $modx->log(modX::LOG_LEVEL_INFO, 'Faled. TemplateVar <b>img</b> not found');
-            return true;
-        }
-        foreach ($set_list as $set) {
-            $rule_data = array(
-                    'set' => $set->id,
-                    'action' => $set->action,
-                    'name' => 'tv' . $tv->id,
-                    'container' => 'modx-panel-resource',
-                    'rule' => 'tvMove',
-                    'value' => 'modx-resource-main-right',
-                    'constraint_class' => 'modResource'
-                );
-            if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
-                $rule_data['active'] = true;
-                $rule = $modx->newObject('modActionDom', $rule_data);
-                $rule->save();
-            }
-        }
-        
-        if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'show_on_page'))) {
-            $modx->log(modX::LOG_LEVEL_INFO, 'Faled. TemplateVar <b>show_on_page</b> not found');
-            return true;
-        }
-        foreach ($set_list as $set) {
-            $rule_data = array(
-                    'set' => $set->id,
-                    'action' => $set->action,
-                    'name' => 'tv' . $tv->id,
-                    'container' => 'modx-panel-resource',
-                    'rule' => 'tvMove',
-                    'value' => 'modx-resource-main-right',
-                    'constraint_class' => 'modResource'
-                );
-            if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
-                $rule_data['active'] = true;
-                $rule = $modx->newObject('modActionDom', $rule_data);
-                $rule->save();
-            }
-        }
-        
-        
-        if ($contacts = $modx->getObject('modResource', array('alias' => 'contacts', 'parent' => 0))) {
-            $res_id = $contacts->get('id');
-            $set_list = array();
-            $set = array('profile' => $profile->id);
-            if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource'), $set))) {
-                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'description' => 'Правила для страницы контактов', 'active' => true), $set));
-                $set_list['update_set']->save();
-            }
-            if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'phone'))) {
-                $modx->log(modX::LOG_LEVEL_INFO, 'Faled. TemplateVar <b>phone</b> not found');
-                return true;
-            }
+        if ($tv = $modx->getObject('modTemplateVar', array('name' => 'img'))) {
             foreach ($set_list as $set) {
                 $rule_data = array(
                         'set' => $set->id,
@@ -95,11 +41,9 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     $rule->save();
                 }
             }
-            
-            if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'address'))) {
-                $modx->log(modX::LOG_LEVEL_INFO, 'Faled. TemplateVar <b>address</b> not found');
-                return true;
-            }
+        }
+        
+        if ($tv = $modx->getObject('modTemplateVar', array('name' => 'show_on_page'))) {
             foreach ($set_list as $set) {
                 $rule_data = array(
                         'set' => $set->id,
@@ -107,7 +51,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                         'name' => 'tv' . $tv->id,
                         'container' => 'modx-panel-resource',
                         'rule' => 'tvMove',
-                        'value' => 'modx-resource-main-left',
+                        'value' => 'modx-resource-main-right',
                         'constraint_class' => 'modResource'
                     );
                 if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
@@ -116,25 +60,71 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     $rule->save();
                 }
             }
-            
-            if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'email'))) {
-                $modx->log(modX::LOG_LEVEL_INFO, 'Faled. TemplateVar <b>email</b> not found');
-                return true;
+        }
+        
+        
+        if ($contacts = $modx->getObject('modResource', array('alias' => 'contacts', 'parent' => 0))) {
+            $res_id = $contacts->get('id');
+            $set_list = array();
+            $set = array('profile' => $profile->id);
+            if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource'), $set))) {
+                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'description' => 'Правила для страницы контактов', 'active' => true), $set));
+                $set_list['update_set']->save();
             }
-            foreach ($set_list as $set) {
-                $rule_data = array(
-                        'set' => $set->id,
-                        'action' => $set->action,
-                        'name' => 'tv' . $tv->id,
-                        'container' => 'modx-panel-resource',
-                        'rule' => 'tvMove',
-                        'value' => 'modx-resource-main-left',
-                        'constraint_class' => 'modResource'
-                    );
-                if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
-                    $rule_data['active'] = true;
-                    $rule = $modx->newObject('modActionDom', $rule_data);
-                    $rule->save();
+            if ($tv = $modx->getObject('modTemplateVar', array('name' => 'phone'))) {
+                foreach ($set_list as $set) {
+                    $rule_data = array(
+                            'set' => $set->id,
+                            'action' => $set->action,
+                            'name' => 'tv' . $tv->id,
+                            'container' => 'modx-panel-resource',
+                            'rule' => 'tvMove',
+                            'value' => 'modx-resource-main-right',
+                            'constraint_class' => 'modResource'
+                        );
+                    if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
+                        $rule_data['active'] = true;
+                        $rule = $modx->newObject('modActionDom', $rule_data);
+                        $rule->save();
+                    }
+                }
+            }
+            
+            if ($tv = $modx->getObject('modTemplateVar', array('name' => 'address'))) {
+                foreach ($set_list as $set) {
+                    $rule_data = array(
+                            'set' => $set->id,
+                            'action' => $set->action,
+                            'name' => 'tv' . $tv->id,
+                            'container' => 'modx-panel-resource',
+                            'rule' => 'tvMove',
+                            'value' => 'modx-resource-main-left',
+                            'constraint_class' => 'modResource'
+                        );
+                    if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
+                        $rule_data['active'] = true;
+                        $rule = $modx->newObject('modActionDom', $rule_data);
+                        $rule->save();
+                    }
+                }
+            }
+            
+            if ($tv = $modx->getObject('modTemplateVar', array('name' => 'email'))) {
+                foreach ($set_list as $set) {
+                    $rule_data = array(
+                            'set' => $set->id,
+                            'action' => $set->action,
+                            'name' => 'tv' . $tv->id,
+                            'container' => 'modx-panel-resource',
+                            'rule' => 'tvMove',
+                            'value' => 'modx-resource-main-left',
+                            'constraint_class' => 'modResource'
+                        );
+                    if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
+                        $rule_data['active'] = true;
+                        $rule = $modx->newObject('modActionDom', $rule_data);
+                        $rule->save();
+                    }
                 }
             }
         }
@@ -147,24 +137,22 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'description' => 'Правила для страницы галереи', 'active' => true), $set));
                 $set_list['update_set']->save();
             }
-            if (!$tv = $modx->getObject('modTemplateVar', array('name' => 'gallery'))) {
-                $modx->log(modX::LOG_LEVEL_INFO, 'Faled. TemplateVar <b>gallery</b> not found');
-                return true;
-            }
-            foreach ($set_list as $set) {
-                $rule_data = array(
-                        'set' => $set->id,
-                        'action' => $set->action,
-                        'name' => 'tv' . $tv->id,
-                        'container' => 'modx-panel-resource',
-                        'rule' => 'tvMove',
-                        'value' => 'modx-resource-main-left',
-                        'constraint_class' => 'modResource'
-                    );
-                if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
-                    $rule_data['active'] = true;
-                    $rule = $modx->newObject('modActionDom', $rule_data);
-                    $rule->save();
+            if ($tv = $modx->getObject('modTemplateVar', array('name' => 'gallery'))) {
+                foreach ($set_list as $set) {
+                    $rule_data = array(
+                            'set' => $set->id,
+                            'action' => $set->action,
+                            'name' => 'tv' . $tv->id,
+                            'container' => 'modx-panel-resource',
+                            'rule' => 'tvMove',
+                            'value' => 'modx-resource-main-left',
+                            'constraint_class' => 'modResource'
+                        );
+                    if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
+                        $rule_data['active'] = true;
+                        $rule = $modx->newObject('modActionDom', $rule_data);
+                        $rule->save();
+                    }
                 }
             }
         }

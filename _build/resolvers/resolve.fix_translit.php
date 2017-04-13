@@ -9,6 +9,7 @@ if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
 		case xPDOTransport::ACTION_INSTALL:
 		case xPDOTransport::ACTION_UPGRADE:
+		    if (!in_array('translit', $options['install_addons'])) return true;
 			if (!file_exists($table)) {
 			    $modx->log(modX::LOG_LEVEL_INFO, 'Run <b>Fix transliteration</b>');
                 $content = "<?php
@@ -72,18 +73,17 @@ return array (
 			break;
 
 		case xPDOTransport::ACTION_UNINSTALL:
-		    if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'friendly_alias_translit'))) {
-                $tmp = $modx->newObject('modSystemSetting');
+		    if ($tmp = $modx->getObject('modSystemSetting', array('key' => 'friendly_alias_translit'))) {
+                $tmp->fromArray(array(
+                    'namespace' => 'core',
+                    'area'      => 'furls',
+                    'xtype'     => 'textfield',
+                    'value'     => 'russian',
+                    'key'       => 'friendly_alias_translit',
+                ), '', true, true);
+                $tmp->save();
             }
-            $tmp->fromArray(array(
-                'namespace' => 'core',
-                'area'      => 'furls',
-                'xtype'     => 'textfield',
-                'value'     => 'russian',
-                'key'       => 'friendly_alias_translit',
-            ), '', true, true);
-            $tmp->save();
-		    unlink($table);
+            if (file_exists($table)) unlink($table);
 			break;
 	}
 }

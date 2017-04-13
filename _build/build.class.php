@@ -11,7 +11,7 @@ class siteBuilder {
     public $category_attr = array();
     public $modx;
     
-    public function __construct($PACKAGE_NAME, $PACKAGE_VERSION, $PACKAGE_RELEASE, $BUILD_RESOLVERS) {
+    public function __construct($PACKAGE_NAME, $PACKAGE_VERSION, $PACKAGE_RELEASE, $BUILD_RESOLVERS, $ADDONS) {
         if (!empty($PACKAGE_NAME)) {
             $this->config['PACKAGE_NAME'] = $PACKAGE_NAME;
         }
@@ -23,6 +23,9 @@ class siteBuilder {
         }
         if (!empty($BUILD_RESOLVERS) || is_array($BUILD_RESOLVERS)) {
             $this->config['BUILD_RESOLVERS'] = $BUILD_RESOLVERS;
+        }
+        if (!empty($ADDONS) || is_array($ADDONS)) {
+            $this->config['ADDONS'] = $ADDONS;
         }
     }
     
@@ -104,7 +107,8 @@ class siteBuilder {
         
         $builder->setPackageAttributes(array(
             'site_category' => $this->config['PACKAGE_NAME'],
-            'site_template_name' => $this->config['site_template_name']
+            'site_template_name' => $this->config['site_template_name'],
+            'ADDONS' => $this->config['ADDONS']
         ));
         $vehicle = $builder->createVehicle($category, $this->category_attr);
         $this->addResolvers($vehicle);
@@ -210,6 +214,9 @@ class siteBuilder {
         	'changelog' => file_get_contents($this->config['PACKAGE_ROOT'] . 'core/components/' . strtolower($this->config['PACKAGE_NAME']) . '/docs/' . 'changelog.txt'),
         	'license' => file_get_contents($this->config['PACKAGE_ROOT'] . 'core/components/' . strtolower($this->config['PACKAGE_NAME']) . '/docs/' . 'license.txt'),
         	'readme' => file_get_contents($this->config['PACKAGE_ROOT'] . 'core/components/' . strtolower($this->config['PACKAGE_NAME']) . '/docs/' . 'readme.txt'),
+        	'setup-options' => array(
+                'source' => $this->config['PACKAGE_ROOT'] . '_build/includes/setup.options.php',
+        	),
         ));
         $this->modx->log(modX::LOG_LEVEL_INFO, 'Added package attributes.');
         

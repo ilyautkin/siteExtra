@@ -24,9 +24,14 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $name = 'img';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            if (in_array('FastUploadTV', $options['install_addons'])) {
+                $image_tv_type = 'fastuploadtv';
+            } else {
+                $image_tv_type = 'image';
+            }
             $tv->fromArray(array(
                 'name'         => $name,
-                'type'         => 'fastuploadtv',
+                'type'         => $image_tv_type,
                 'caption'      => 'Изображение',
                 'category'     => $cat_id,
                 'input_properties' => array(
@@ -99,21 +104,23 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tvs[] = $tv->get('id');
         }
         
-        $name = 'gallery';
-        if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
-            $tv = $modx->newObject('modTemplateVar');
-            $tv->fromArray(array(
-                'name'         => $name,
-                'type'         => 'migx',
-                'caption'      => 'Фотогалерея',
-                'category'     => $cat_id,
-                'input_properties' => array(
-                                        "formtabs" => '[{"caption":"Gallery","fields": [{"field":"img","caption":"Картинка","inputTV":"img"},{"field":"title","caption":"Название"}]}]',
-                                        "columns" => '[{"header": "Картинка","dataIndex": "img","renderer":"this.renderImage","width":"100"},{"header": "Название","dataIndex": "title","width":"400"}]'
-                                    ),
-            ));
-            $tv->save();
-            $tvs[] = $tv->get('id');
+        if (in_array('MIGX', $options['install_addons'])) {
+            $name = 'gallery';
+            if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
+                $tv = $modx->newObject('modTemplateVar');
+                $tv->fromArray(array(
+                    'name'         => $name,
+                    'type'         => 'migx',
+                    'caption'      => 'Фотогалерея',
+                    'category'     => $cat_id,
+                    'input_properties' => array(
+                                            "formtabs" => '[{"caption":"Gallery","fields": [{"field":"img","caption":"Картинка","inputTV":"img"},{"field":"title","caption":"Название"}]}]',
+                                            "columns" => '[{"header": "Картинка","dataIndex": "img","renderer":"this.renderImage","width":"100"},{"header": "Название","dataIndex": "title","width":"400"}]'
+                                        ),
+                ));
+                $tv->save();
+                $tvs[] = $tv->get('id');
+            }
         }
         
         foreach ($modx->getCollection('modTemplate') as $template) {
