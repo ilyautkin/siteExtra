@@ -12,11 +12,15 @@ $https = false;
 // robots.txt allways without redirect
 if ($uri == '/robots.txt') return;
 
+if ($https) {
+    $protocol = 'https://';
+} else {
+    $protocol = 'http://';
+}
+
 if ($http_host != $site_url || ($https && !$_SERVER['HTTPS'])) {
-    if ($https) {
-        $protocol = 'https://';
-    } else {
-        $protocol = 'http://';
-    }
     $modx->sendRedirect($protocol.$site_url.$uri, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+}
+if ($_SERVER['REQUEST_URI'] == '/index.php') {
+    $modx->sendRedirect($protocol.$site_url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
 }

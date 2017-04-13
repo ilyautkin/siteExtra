@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     // Fix image margins in content
     $("#content img, .galleryouter img").each(function() {
         var marginLable = '';
@@ -24,25 +23,10 @@ $(document).ready(function() {
         $(this).css(imgStyle);
 
     });
-
-    // Removing AjaxForm success message
-    if (typeof(AjaxForm) != 'undefined') {
-        AjaxForm.Message.success = function() {};
-    }
-
-});
-
-// Show AjaxForm success message in modal
-$(document).on('af_complete', function(event, response) {
-    var form = response.form;
-    if (response.success) {
-        $.fancybox.close();
-        $.fancybox(response.message);
-    }
 });
 
 // FancyBox initialization
-$(".fancybox2").fancybox({
+$(".fancybox3").fancybox({
     padding: 0,
 
     minWidth: 100,

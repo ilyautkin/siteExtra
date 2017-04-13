@@ -1,3 +1,10 @@
+1.2.5-beta
+==============
+- Added snippet clearPhone
+- Added redirect from index.php
+- FancyBox2 replaced by Fancybox3
+- Script for AjaxForm moved to footer
+
 1.2.4-beta
 ==============
 - Script for AjaxForm moved to scripts.js

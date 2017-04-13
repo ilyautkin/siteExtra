@@ -61,6 +61,10 @@ $tmp = array(
         'file' => 'tpl_gallery',
         'description' => ''
     ),
+    'scripts' => array(
+        'file' => 'scripts',
+        'description' => ''
+    ),
 );
 $setted = false;
 foreach ($tmp as $k => $v) {

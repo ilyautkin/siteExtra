@@ -13,6 +13,10 @@ $tmp = array(
         'file' => 'contain',
         'description' => ''
     ),
+    'clearPhone' => array(
+        'file' => 'clearphone',
+        'description' => ''
+    ),
 );
 
 foreach ($tmp as $k => $v) {
