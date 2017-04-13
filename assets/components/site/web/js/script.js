@@ -26,7 +26,7 @@ $(document).ready(function() {
 });
 
 // FancyBox initialization
-$(".fancybox3").fancybox({
+$(".fancybox2").fancybox({
     padding: 0,
 
     minWidth: 100,
