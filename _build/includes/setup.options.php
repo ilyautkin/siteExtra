@@ -22,7 +22,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $i = $col = 0;
             foreach ($checkboxes as $checkbox) {
                 if (!isset($cols[$col])) {
-                    $cols[$col] = '';
+                    $cols[$col] = array();
                 }
                 $cols[$col][] = '
                     <li style="width: 45%; margin: 2px 5% 0 0; float: left;">
