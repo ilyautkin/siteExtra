@@ -1,4 +1,8 @@
-<h1>[[*longtitle:default=`[[*pagetitle]]`]]</h1>
-[[*content]]
-[[[[*gallery:neq=``:then=`$gallery`:else=`--`]]]]
-[[[[*id:eq=`[[++site_start]]`:then=`$block.gallery`:else=`--`]]]]
+<h1>{$_modx->resource.longtitle ?: $_modx->resource.pagetitle}</h1>
+{block 'content'}
+  {$_modx->resource.content}
+  {include 'gallery'}
+  {if $_modx->resource.id == $_modx->config.site_start}
+    {include 'block.gallery'}
+  {/if}
+{/block}

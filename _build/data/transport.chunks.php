@@ -57,10 +57,6 @@ $tmp = array(
         'file' => 'block_gallery',
         'description' => ''
     ),
-    'tpl.gallery' => array(
-        'file' => 'tpl_gallery',
-        'description' => ''
-    ),
     'scripts' => array(
         'file' => 'scripts',
         'description' => ''

@@ -37,5 +37,5 @@ $addons = array(
             'FastUploadTV' => '1.0.0-pl'
         )),
 );
-$builder = new siteBuilder('site', '1.3.2', 'beta', $resolvers, $addons);
+$builder = new siteBuilder('site', '1.4.0', 'beta', $resolvers, $addons);
 $builder->build();

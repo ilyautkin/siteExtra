@@ -1,19 +1,20 @@
+{var $cnt = $_modx->config.site_contacts_id}
 <header class="page-header row">
   <div class="col-sm-4">
     <h2>
-      <a href="[[++site_url]]" id="logo">
-        <nobr><span class="glyphicon glyphicon-send" style="margin-right: 0.5em"></span>[[++site_name]]</nobr>
+      <a href="{$_modx->config.site_url}" id="logo">
+        <nobr><span class="glyphicon glyphicon-send" style="margin-right: 0.5em"></span>{$_modx->config.site_name}</nobr>
       </a>
     </h2>
   </div>
   <div class="col-sm-4">
     <p style="margin-top: 27px;">
-      [[#[[++site_contacts_id]].address]]
+      {$cnt | resource : 'address'}
     </p>
   </div>
   <div class="col-sm-4">
     <h2 class="text-right">
-      <nobr><a href="tel:[[#[[++site_contacts_id]].phone:clearPhone]]">[[#[[++site_contacts_id]].phone]]</a></nobr>
+      <nobr><a href="tel:{$cnt | resource : 'phone'  | clearPhone}">{$cnt | resource : 'phone'}</a></nobr>
     </h2>
   </div>
 </header>

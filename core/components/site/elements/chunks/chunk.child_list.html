@@ -1,10 +1,10 @@
 <br>
 <div id="child_list">
   <div class="rows">
-  [[!pdoPage?
-    &ajaxMode=`default`
+  {'!pdoPage' | snippet : [
+    'ajaxMode' => 'default',
     
-    &tpl=`@INLINE <div class="media">
+    'tpl' => '@INLINE <div class="media">
           {if $img}
           <div class="media-left">
             <a href="{$uri}" title="{$longtitle}">
@@ -17,24 +17,24 @@
             <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {$publishedon | date_format : "%d.%m.%Y г."}</p>
             {$content | striptags | ellipsis : "250"}
           </div>
-        </div>`
-    &limit=`15`
-    &includeTVs=`img`
-    &tvPrefix=``
-    &includeContent=`1`
+        </div>',
+    'limit' => 15,
+    'includeTVs' => 'img',
+    'tvPrefix' => '',
+    'includeContent' => 1,
     
-    &tplPageWrapper=`@INLINE <div class="pagination"><ul class="pagination pagination-lg">[[+prev]][[+pages]][[+next]]</ul></div>`
-    &tplPage=`@INLINE <li><a href="[[+href]]">[[+pageNo]]</a></li>`
-    &tplPageActive=`@INLINE <li class="active"><a href="[[+href]]">[[+pageNo]]</a></li>`
-    &tplPagePrev=`@INLINE <li rel="prev"><a href="[[+href]]">« Назад</a></li>`
-    &tplPageNext=`@INLINE <li rel="next"><a href="[[+href]]">Дальше »</a></li>`
-    &tplPagePrevEmpty=`@INLINE `
-    &tplPageNextEmpty=`@INLINE `
-    &ajaxElemWrapper=`#child_list`
-    &ajaxElemRows=`#child_list .rows`
-    &ajaxElemPagination=`#child_list .pagination`
-    &ajaxElemLink=`#child_list .pagination a`
-  ]]
+    'tplPageWrapper' => '@INLINE <div class="pagination"><ul class="pagination pagination-lg">{$prev}{$pages}{$next}</ul></div>',
+    'tplPage' => '@INLINE <li><a href="{$href}">{$pageNo}</a></li>',
+    'tplPageActive' => '@INLINE <li class="active"><a href="{$href}">{$pageNo}</a></li>',
+    'tplPagePrev' => '@INLINE <li rel="prev"><a href="{$href}">« Назад</a></li>',
+    'tplPageNext' => '@INLINE <li rel="next"><a href="{$href}">Дальше »</a></li>',
+    'tplPagePrevEmpty' => '@INLINE ',
+    'tplPageNextEmpty' => '@INLINE ',
+    'ajaxElemWrapper' => '#child_list',
+    'ajaxElemRows' => '#child_list .rows',
+    'ajaxElemPagination' => '#child_list .pagination',
+    'ajaxElemLink' => '#child_list .pagination a',
+  ]}
   </div>
-  [[!+page.nav]]
+  {$_modx->getPlaceholder('page.nav')}
 </div>

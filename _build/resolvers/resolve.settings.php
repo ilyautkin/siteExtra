@@ -213,6 +213,20 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tmp->save();
         }
         
+        if (in_array('pdoTools', $options['install_addons'])) {
+            if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'pdotools_fenom_parser'))) {
+                $tmp = $modx->newObject('modSystemSetting');
+            }
+            $tmp->fromArray(array(
+                'namespace' => 'pdotools',
+                'area'      => 'pdotools_main',
+                'xtype'     => 'combo-boolean',
+                'value'     => '1',
+                'key'       => 'pdotools_fenom_parser',
+            ), '', true, true);
+            $tmp->save();
+        }
+        
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'locale'))) {
             $tmp = $modx->newObject('modSystemSetting');
         }

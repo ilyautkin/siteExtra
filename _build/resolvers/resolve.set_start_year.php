@@ -9,7 +9,9 @@ if ($object->xpdo) {
 		    $modx->log(modX::LOG_LEVEL_INFO, 'Run <b>Set start year for copyright</b>');
             
             if ($tmp = $modx->getObject('modChunk', array('name' => 'footer'))) {
-                $tmp->set('content', str_replace('&start=``', '&start=`'.date('Y').'`', $tmp->get('content')));
+                $tmp->set('content', str_replace(
+                    "{'!year' | snippet : ['start' => '']}",
+                    "{'!year' | snippet : ['start' => '".date('Y')."']}", $tmp->get('content')));
                 $tmp->save();
             }
 			break;

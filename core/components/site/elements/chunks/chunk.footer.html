@@ -2,7 +2,7 @@
     <hr>
 	<div class="row">
 		<div class="col-xs-6">
-		    <p>&copy; [[!year? &start=``]] [[++site_name]]</p>
+		    <p>&copy; {'!year' | snippet : ['start' => '']} {$_modx->config.site_name}</p>
 		</div>
 		<div class="col-xs-6">
 			<p class="text-right">

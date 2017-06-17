@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-[[$head]]
+{include 'head'}
 </head>
 <body>
   <div class="container">
-    [[$header]]
-    [[$menu]]
+    {include 'header'}
+    {include 'menu'}
     <section class="row">
       <article class="col-sm-8">
-        [[[[*show_on_page:contain=`2`:eq=`true`:then=`$content`:else=`--`]]]]
-        [[[[*show_on_page:contain=`1`:eq=`true`:then=`$child_list`:else=`--`]]]]
+        {var $show_on_page = $_modx->resource.show_on_page}
+        {if $show_on_page | contain : "2" == 'true'}
+          {include 'content'}
+        {/if}
+        {if $show_on_page | contain : "1" == 'true'}
+          {include 'child_list'}
+        {/if}
       </article>
       <aside class="col-sm-4">
-        [[$aside]]
+        {include 'aside'}
       </aside>
     </section>
-    [[$footer]]
+    {include 'footer'}
   </div>
-  [[$scripts]]
+  {include 'scripts'}
 </body>
 </html>

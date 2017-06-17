@@ -1,8 +1,10 @@
+{var $nws = $_modx->config.site_news_id}
+{var $spc = $_modx->config.site_specs_id}
 <br><hr>
-[[pdoResources?
-    &parents=`[[++site_news_id]]`
-    &limit=`3`
-    &tpl=`@INLINE <div class="media">
+{'pdoResources' | snippet : [
+    'parents' => $nws,
+    'limit' => 3,
+    'tpl' => '@INLINE <div class="media">
           {if $img}
           <div class="media-left">
             <a href="{$uri}" title="{$longtitle}">
@@ -15,20 +17,20 @@
             <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {$publishedon | date_format : "%d.%m.%Y г."}</p>
             <small>{$content | striptags | ellipsis : "110"}</small>
           </div>
-        </div>`
-    &includeContent=`1`
-    &includeTVs=`img`
-    &tvPrefix=``
-]]
+        </div>',
+    'includeContent' => 1,
+    'includeTVs' => 'img',
+    'tvPrefix' => '',
+]}
 <br><hr>
-<h3><a href="[[~[[++site_specs_id]]]]">Наши специалисты</a></h3>
+<h3><a href="{$spc | resource : 'uri'}">Наши специалисты</a></h3>
 <br>
 <div class="row">
-    [[pdoResources?
-        &parents=`[[++site_specs_id]]`
-        &limit=`2`
-        &sortby=`{"menuindex":"ASC"}`
-        &tpl=`@INLINE <div class="col-md-6">
+    {'pdoResources' | snippet : [
+        'parents' => $spc,
+        'limit' => 2,
+        'sortby' => '{"menuindex":"ASC"}',
+        'tpl' => '@INLINE <div class="col-md-6">
             <div class="thumbnail">
               <a href="{$uri}" title="{$longtitle}">
                   <img src="{$img | phpthumbon : "w=155&h=155&zc=1"}" alt="{$pagetitle}">
@@ -37,18 +39,18 @@
                 <p class="text-center"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></p>
               </div>
             </div>
-          </div>`
-        &includeContent=`1`
-        &includeTVs=`img`
-        &tvPrefix=``
-    ]]
+          </div>',
+        'includeContent' => 1,
+        'includeTVs' => 'img',
+        'tvPrefix' => '',
+    ]}
     <div class="hidden-sm hidden-xs">
-        [[pdoResources?
-            &parents=`[[++site_specs_id]]`
-            &limit=`2`
-            &offset=`2`
-            &sortby=`{"menuindex":"ASC"}`
-            &tpl=`@INLINE <div class="col-md-6">
+        {'pdoResources' | snippet : [
+            'parents' => $spc,
+            'limit' => 2,
+            'offset' => 2,
+            'sortby' => '{"menuindex":"ASC"}',
+            'tpl' => '@INLINE <div class="col-md-6">
                 <div class="thumbnail">
                   <a href="{$uri}" title="{$longtitle}">
                       <img src="{$img | phpthumbon : "w=155&h=155&zc=1"}" alt="{$pagetitle}">
@@ -57,10 +59,10 @@
                     <p class="text-center"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></p>
                   </div>
                 </div>
-              </div>`
-            &includeContent=`1`
-            &includeTVs=`img`
-            &tvPrefix=``
-        ]]
+              </div>',
+            'includeContent' => 1,
+            'includeTVs' => 'img',
+            'tvPrefix' => '',
+        ]}
     </div>
 </div>

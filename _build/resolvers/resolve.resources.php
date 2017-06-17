@@ -45,8 +45,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 User-agent: *
                 Allow: /
                 
-                Host: [[!++http_host]]
-                Sitemap: [[!++site_url]]sitemap.xml
+                Host: \{\$_modx->config.http_host\}
+                Sitemap: \{\$_modx->config.site_url\}sitemap.xml
             ")
         ));
         $resource->save();
@@ -115,7 +115,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'parent'       => $parent,
             'template'     => $templateId,
             'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', '
-                [[$specialists]]
+                {include \'specialists\'}
             ')
         ));
         $resource->save();
@@ -409,10 +409,10 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'parent'       => $parent,
             'template'     => $templateId,
             'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', '
-                <p>Адрес: [[*address]]</p>
-                <p>Телефон: [[*phone]]</p>
-                <p>E-mail: [[*email]]</p>
-                [[$contact_form]]
+                <p>Адрес: {$_modx->resource.address}</p>
+                <p>Телефон: {$_modx->resource.phone}</p>
+                <p>E-mail: {$_modx->resource.email}</p>
+                {include \'contact_form\'}
             ')
         ));
         $resource->save();
@@ -470,7 +470,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                         <h3 style='margin: 15px 0 0;'>Что делать?</h3>
                         <ul style='margin: 5px 0 0 15px;'>
                             <li>проверьте правильность написания адреса,</li>
-                            <li>перейдите на <a href='[[!++site_url]]'>главную страницу</a> сайта,</li>
+                            <li>перейдите на <a href='\{\$_modx->config.site_url\}'>главную страницу</a> сайта,</li>
                             <li>или <a href='javascript:history.go(-1);'>вернитесь на предыдущую страницу</a>.</li>
                         </ul>
                     </div>
@@ -501,17 +501,17 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'parent'       => $parent,
             'template'     => $templateId,
             'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
-                [[pdoMenu?
-                    &startId=`0`
-                    &ignoreHidden=`1`
-                    &resources=`-".$res404.",-[[*id]]`
-                    &level=`2`
-                    &outerClass=``
-                    &firstClass=``
-                    &lastClass=``
-                    &hereClass=``
-                    &where=`{\"searchable\":1}`
-                ]]
+                \{'pdoMenu' | snippet : [
+                    'startId' => 0,
+                    'ignoreHidden' => 1,
+                    'resources' => '-".$res404.",-' ~ \$_modx->resource.id,
+                    'level' => 2,
+                    'outerClass' => '',
+                    'firstClass' => '',
+                    'lastClass' => '',
+                    'hereClass' => '',
+                    'where' => `{\"searchable\":1}'
+                ]\}
             ")
         ));
         $resource->save();
@@ -542,7 +542,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'contentType'  => 'text/xml',
 
             'content' => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
-                [[pdoSitemap? &showHidden=`1` &resources=`-{$res404}`]]
+                \{'pdoSitemap' | snippet : [ 'showHidden' => 1, 'resources' => '-{$res404}' ]\}
             ")
         ));
         $resource->save();
