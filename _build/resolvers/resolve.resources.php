@@ -46,6 +46,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 Allow: /
                 
                 Host: {\$_modx->config.http_host}
+                
                 Sitemap: {\$_modx->config.site_url}sitemap.xml
             ")
         ));
