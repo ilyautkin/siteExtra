@@ -45,8 +45,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 User-agent: *
                 Allow: /
                 
-                Host: \{\$_modx->config.http_host\}
-                Sitemap: \{\$_modx->config.site_url\}sitemap.xml
+                Host: {\$_modx->config.http_host}
+                Sitemap: {\$_modx->config.site_url}sitemap.xml
             ")
         ));
         $resource->save();
@@ -470,7 +470,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                         <h3 style='margin: 15px 0 0;'>Что делать?</h3>
                         <ul style='margin: 5px 0 0 15px;'>
                             <li>проверьте правильность написания адреса,</li>
-                            <li>перейдите на <a href='\{\$_modx->config.site_url\}'>главную страницу</a> сайта,</li>
+                            <li>перейдите на <a href='{\$_modx->config.site_url}'>главную страницу</a> сайта,</li>
                             <li>или <a href='javascript:history.go(-1);'>вернитесь на предыдущую страницу</a>.</li>
                         </ul>
                     </div>
@@ -501,7 +501,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'parent'       => $parent,
             'template'     => $templateId,
             'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
-                \{'pdoMenu' | snippet : [
+                {'pdoMenu' | snippet : [
                     'startId' => 0,
                     'ignoreHidden' => 1,
                     'resources' => '-".$res404.",-' ~ \$_modx->resource.id,
@@ -510,8 +510,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'firstClass' => '',
                     'lastClass' => '',
                     'hereClass' => '',
-                    'where' => `{\"searchable\":1}'
-                ]\}
+                    'where' => '{\"searchable\":1}'
+                ]}
             ")
         ));
         $resource->save();
@@ -542,7 +542,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'contentType'  => 'text/xml',
 
             'content' => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
-                \{'pdoSitemap' | snippet : [ 'showHidden' => 1, 'resources' => '-{$res404}' ]\}
+                {'pdoSitemap' | snippet : [ 'showHidden' => 1, 'resources' => '-{$res404}' ]}
             ")
         ));
         $resource->save();
