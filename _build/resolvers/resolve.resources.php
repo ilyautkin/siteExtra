@@ -135,7 +135,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $tmp->save();
         
         if ($addspecs) {
-            $resource->setTVValue('show_on_page', '2');
+            $resource->setTVValue('show_on_page', 'content');
             $specParent = $resource->get('id');
             for ($i = 1; $i <= 5; $i++) {
                 /* Специалист 1 */

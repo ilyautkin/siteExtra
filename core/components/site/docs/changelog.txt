@@ -1,3 +1,8 @@
+1.4.1-beta
+==============
+- Snippets "years" and "contain" removed
+- Checking for execute set_start_year resolver
+
 1.4.0-beta
 ==============
 - Syntax of templates changed to Fenom

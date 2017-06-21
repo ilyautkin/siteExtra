@@ -5,14 +5,6 @@
 $snippets = array();
 
 $tmp = array(
-    'year' => array(
-        'file' => 'year',
-        'description' => ''
-    ),
-    'contain' => array(
-        'file' => 'contain',
-        'description' => ''
-    ),
     'clearPhone' => array(
         'file' => 'clearphone',
         'description' => ''

@@ -54,8 +54,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 'type'         => 'checkbox',
                 'caption'      => 'Отображать на странице',
                 'category'     => $cat_id,
-                'elements'     => 'Дочерние ресурсы==1||Контент==2',
-                'default_text' => '1||2',
+                'elements'     => 'Дочерние ресурсы==children||Контент==content',
+                'default_text' => 'children||content',
                 'display'      => 'delim',
                 'output_properties' => array(
                                 'delimiter' => '||'
