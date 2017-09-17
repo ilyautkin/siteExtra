@@ -7,6 +7,7 @@
 <base href="{$_modx->config.site_url}">
 <title>{$_modx->resource.pagetitle}</title>
 <meta name="description" content="{$_modx->resource.introtext | replace :' "':' «' | replace :'"':'»'}">
+{if $_modx->resource.img}<meta property="og:image" content="{$_modx->config.site_url}{$_modx->resource.img | phpthumbon : "w=400&h=280"}" />{/if}
 
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">

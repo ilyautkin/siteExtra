@@ -1,3 +1,8 @@
+1.4.2-beta
+==============
+- Added og:image meta tag
+- Added css fot TVTable plugin
+
 1.4.1-beta
 ==============
 - Snippets "years" and "contain" removed

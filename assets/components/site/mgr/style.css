@@ -1,7 +1,12 @@
 #modx-resource-introtext {height: 130px !important;}
 #modx-resource-description {height: 101px !important;}
-#modx-resource-main-columns .x-form-item.modx-tv {padding-left: 0 !important;}
-#modx-resource-main-columns .modx-tv-form-element input {padding: 5px 1% !important; width: 98% !important;}
-#modx-resource-main-columns .tv_modx-grid-multitvgrid_items .x-grid3-body,
-#modx-resource-main-columns .x-grid3-row {width: 100% !important;}
+.x-form-item.modx-tv {padding-left: 0 !important;}
+.modx-tv-form-element input {padding: 5px 1% !important; width: 98% !important;}
+.tv_modx-grid-multitvgrid_items .x-grid3-body,
+.x-grid3-row {width: 100% !important;}
 .modx-js-parse-error {opacity: 1 !important;}
+.tvtEditor input {width: 14% !important;}
+.tvtEditor input.add,
+.tvtEditor input.del,
+.tvtEditor input.del_item,
+.tvtEditor input.add_item {width: 30px !important; padding: 8px 23px 22px 10px !important;}
