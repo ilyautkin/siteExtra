@@ -1,3 +1,8 @@
+1.4.4-beta
+==============
+- Fix addManagerCss bug
+- Fix elements columns of MIGX tv
+
 1.4.3-beta
 ==============
 - New TVs: subtitle, keywords, elements

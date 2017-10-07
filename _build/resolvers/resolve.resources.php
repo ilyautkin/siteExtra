@@ -558,6 +558,12 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 $chunk->save();
             }
         }
+        if ($plugin = $modx->getObject('modPlugin', array('name' => 'addManagerCss'))) {
+            $plugincode = $plugin->plugincode;
+            $plugincode = str_replace('SITE_FOLDER_NAME', strtolower($options['site_template_name']), $plugincode);
+            $plugin->set('plugincode', $plugincode);
+            $plugin->save();
+        }
         break;
     case xPDOTransport::ACTION_UNINSTALL:
         break;

@@ -140,19 +140,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'caption'      => 'Элементы',
                     'category'     => $cat_id,
                     'input_properties' => array(
-                                            "formtabs" => '[
-                                                {"caption":"Элемент","fields":[
-                                                    {"field":"title","caption":"Заголовок"},
-                                                    {"field":"subtitle","caption":"Подзаголовок"},
-                                                    {"field":"img","caption":"Изображение","inputTV":"img"},
-                                                    {"field":"content","caption":"Контент","inputTVtype":"richtext"}
-                                                  ]
-                                                }
-                                              ]',
-                                            "columns" => '[
-                                                {"header":"Изображение","dataIndex":"img","width":200,"renderer":"this.renderImage"},
-                                                {"header":"Содержимое","dataIndex":"title_r","width":400,"renderer":"this.renderChunk","renderchunktpl":"<h3 style=\"margin:0;\">[[+title]]<\/h3>\n[[+subtitle:notempty=`<h4 style=\"margin: 5px 0 0;\">[[+subtitle]]<\/h4>`]]\n[[+content:notempty=`<p style=\"margin-top: 3px; white-space: normal;\">[[+content:striptags:ellipsis=`200`]]<\/p>`]]"}
-                                              ]'
+                                            "formtabs" => '[{"caption":"Элемент","fields":[{"field":"title","caption":"Заголовок"},{"field":"subtitle","caption":"Подзаголовок"},{"field":"img","caption":"Изображение","inputTV":"img"},{"field":"content","caption":"Контент","inputTVtype":"richtext"}]}]',
+                                            "columns" => '[{"header":"Изображение","dataIndex":"img","width":200,"renderer":"this.renderImage"},{"header":"Содержимое","dataIndex":"title","width":400}]'
                                         ),
                 ));
                 $tv->save();
