@@ -25,6 +25,14 @@ $tmp = array(
         'file' => 'content',
         'description' => ''
     ),
+    'content_default' => array(
+        'file' => 'content_default',
+        'description' => ''
+    ),
+    'content_specialist' => array(
+        'file' => 'content_specialist',
+        'description' => ''
+    ),
     'aside' => array(
         'file' => 'aside',
         'description' => ''

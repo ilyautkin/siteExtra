@@ -9,13 +9,7 @@
     {include 'menu'}
     <section class="row">
       <article class="col-sm-8">
-        {var $show_on_page = $_modx->resource.show_on_page}
-        {if $show_on_page | match : '*content*'}
-          {include 'content'}
-        {/if}
-        {if $show_on_page | match : '*children*'}
-          {include 'child_list'}
-        {/if}
+        {include 'content'}
       </article>
       <aside class="col-sm-4">
         {include 'aside'}

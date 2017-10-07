@@ -20,6 +20,7 @@ $addons = array(
             'FormIt' => '2.2.10-pl',
             'autoRedirector' => '0.1.0-beta',
             'CKEditor' => '1.3.0-pl',
+            'TinyMCE Rich Text Editor' => '1.2.0-pl',
             'Collections' => '3.4.2-pl',
             'Console' => '2.1.0-beta',
             'MIGX' => '2.9.6-pl',
@@ -37,5 +38,5 @@ $addons = array(
             'FastUploadTV' => '1.0.0-pl'
         )),
 );
-$builder = new siteBuilder('site', '1.4.2', 'beta', $resolvers, $addons);
+$builder = new siteBuilder('site', '1.4.3', 'beta', $resolvers, $addons);
 $builder->build();

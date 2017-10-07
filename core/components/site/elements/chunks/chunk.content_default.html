@@ -1,0 +1,20 @@
+{block 'wrapper'}
+  <h1>{$_modx->resource.longtitle ?: $_modx->resource.pagetitle}</h1>
+  {block 'before_content'}{/block}
+  {block 'content'}
+    {var $show_on_page = $_modx->resource.show_on_page}
+    {if $show_on_page | match : '*content*'}
+      {$_modx->resource.content}
+    {/if}
+    {if $show_on_page | match : '*gallery*'}
+      {include 'gallery'}
+    {/if}
+    {if $_modx->resource.id == $_modx->config.site_start}
+      {include 'block.gallery'}
+    {/if}
+    {if $show_on_page | match : '*children*'}
+      {include 'child_list'}
+    {/if}
+  {/block}
+  {block 'after_content'}{/block}
+{/block}

@@ -1,8 +1,14 @@
-<h1>{$_modx->resource.longtitle ?: $_modx->resource.pagetitle}</h1>
-{block 'content'}
-  {$_modx->resource.content}
-  {include 'gallery'}
-  {if $_modx->resource.id == $_modx->config.site_start}
-    {include 'block.gallery'}
-  {/if}
-{/block}
+{var $defaul = true}
+{switch $_modx->resource.id}
+    {case SITE_SPECS_ID}
+        {var $defaul = false}
+        {include 'specialists'}
+{/switch}
+{switch $_modx->resource.parent}
+    {case SITE_SPECS_ID}
+        {var $defaul = false}
+        {include 'content_specialist'}
+{/switch}
+{if $defaul}
+    {include 'content_default'}
+{/if}

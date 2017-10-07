@@ -24,10 +24,20 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 if (!isset($cols[$col])) {
                     $cols[$col] = array();
                 }
+                if (!in_array($checkbox, array(
+                        'CKEditor',
+                        'TinyMCE Rich Text Editor',
+                        'tagElementPlugin',
+                        'frontendManager'
+                    ))) {
+                    $checked = 'checked';
+                } else {
+                    $checked = '';
+                }
                 $cols[$col][] = '
                     <li style="width: 45%; margin: 2px 5% 0 0; float: left;">
                         <label>
-                            <input type="checkbox" name="install_addons[]" checked value="' . $checkbox . '"> ' . $checkbox . '
+                            <input type="checkbox" name="install_addons[]" ' . $checked . ' value="' . $checkbox . '"> ' . $checkbox . '
                         </label>
                     </li>';
                 $i++;

@@ -54,8 +54,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 'type'         => 'checkbox',
                 'caption'      => 'Отображать на странице',
                 'category'     => $cat_id,
-                'elements'     => 'Дочерние ресурсы==children||Контент==content',
-                'default_text' => 'children||content',
+                'elements'     => 'Дочерние ресурсы==children||Контент==content||Галерею==gallery',
+                'default_text' => 'children||content||gallery',
                 'display'      => 'delim',
                 'output_properties' => array(
                                 'delimiter' => '||'
@@ -104,18 +104,55 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tvs[] = $tv->get('id');
         }
         
+        $name = 'keywords';
+        if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
+            $tv = $modx->newObject('modTemplateVar');
+            $tv->fromArray(array(
+                'name'         => $name,
+                'type'         => 'text',
+                'caption'      => 'Keywords',
+                'category'     => $cat_id
+            ));
+            $tv->save();
+            $tvs[] = $tv->get('id');
+        }
+        
+        $name = 'subtitle';
+        if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
+            $tv = $modx->newObject('modTemplateVar');
+            $tv->fromArray(array(
+                'name'         => $name,
+                'type'         => 'text',
+                'caption'      => 'Подпись',
+                'category'     => $cat_id
+            ));
+            $tv->save();
+            $tvs[] = $tv->get('id');
+        }
+        
         if (in_array('MIGX', $options['install_addons'])) {
-            $name = 'gallery';
+            $name = 'elements';
             if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
                 $tv = $modx->newObject('modTemplateVar');
                 $tv->fromArray(array(
                     'name'         => $name,
                     'type'         => 'migx',
-                    'caption'      => 'Фотогалерея',
+                    'caption'      => 'Элементы',
                     'category'     => $cat_id,
                     'input_properties' => array(
-                                            "formtabs" => '[{"caption":"Gallery","fields": [{"field":"img","caption":"Картинка","inputTV":"img"},{"field":"title","caption":"Название"}]}]',
-                                            "columns" => '[{"header": "Картинка","dataIndex": "img","renderer":"this.renderImage","width":"100"},{"header": "Название","dataIndex": "title","width":"400"}]'
+                                            "formtabs" => '[
+                                                {"caption":"Элемент","fields":[
+                                                    {"field":"title","caption":"Заголовок"},
+                                                    {"field":"subtitle","caption":"Подзаголовок"},
+                                                    {"field":"img","caption":"Изображение","inputTV":"img"},
+                                                    {"field":"content","caption":"Контент","inputTVtype":"richtext"}
+                                                  ]
+                                                }
+                                              ]',
+                                            "columns" => '[
+                                                {"header":"Изображение","dataIndex":"img","width":200,"renderer":"this.renderImage"},
+                                                {"header":"Содержимое","dataIndex":"title_r","width":400,"renderer":"this.renderChunk","renderchunktpl":"<h3 style=\"margin:0;\">[[+title]]<\/h3>\n[[+subtitle:notempty=`<h4 style=\"margin: 5px 0 0;\">[[+subtitle]]<\/h4>`]]\n[[+content:notempty=`<p style=\"margin-top: 3px; white-space: normal;\">[[+content:striptags:ellipsis=`200`]]<\/p>`]]"}
+                                              ]'
                                         ),
                 ));
                 $tv->save();

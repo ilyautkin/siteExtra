@@ -115,28 +115,34 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'richtext'     => 0,
             'parent'       => $parent,
             'template'     => $templateId,
-            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', '
-                {include \'specialists\'}
-            ')
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', "
+                <p></p>
+            ")
         ));
         $resource->save();
         $specAlias = $alias;
         
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_specs_id'))) {
-            $tmp = $modx->newObject('modSystemSetting');
+        $chunks = array(
+                'aside',
+                'content'
+            );
+        foreach ($chunks as $chunk_name) {
+            if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
+                $chunk->set('snippet', str_replace('SITE_SPECS_ID', $resource->id, $chunk->snippet));
+                $chunk->save();
+            }
         }
-        $tmp->fromArray(array(
-            'namespace' => 'core',
-            'area'      => 'site',
-            'xtype'     => 'textfield',
-            'value'     => $resource->get('id'),
-            'key'       => 'site_specs_id',
-        ), '', true, true);
-        $tmp->save();
         
         if ($addspecs) {
-            $resource->setTVValue('show_on_page', 'content');
+            $resource->setTVValue('show_on_page', 'content||gallery');
             $specParent = $resource->get('id');
+            $positions = array(
+                'Маркетолог',
+                'Маркетолог',
+                'PR-менеджер',
+                'Директор',
+                'Оператор колл-центра'
+            );
             for ($i = 1; $i <= 5; $i++) {
                 /* Специалист 1 */
                 $alias = 'spec-' . $i;
@@ -163,6 +169,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 ));
                 $resource->save();
                 $resource->setTVValue('img', $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/spec' . $i . '.png');
+                $resource->setTVValue('subtitle', $positions[$i-1]);
             }
         }
 
@@ -200,18 +207,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ));
         $resource->save();
         $reviewsAlias = $alias;
-        
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_reviews_id'))) {
-            $tmp = $modx->newObject('modSystemSetting');
-        }
-        $tmp->fromArray(array(
-            'namespace' => 'core',
-            'area'      => 'site',
-            'xtype'     => 'textfield',
-            'value'     => $resource->get('id'),
-            'key'       => 'site_reviews_id',
-        ), '', true, true);
-        $tmp->save();
         
         if ($addReviews) {
             $reviewParent = $resource->get('id');
@@ -282,20 +277,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ));
         $resource->save();
         
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_gallery_id'))) {
-            $tmp = $modx->newObject('modSystemSetting');
+        $chunks = array(
+                'block.gallery'
+            );
+        foreach ($chunks as $chunk_name) {
+            if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
+                $chunk->set('snippet', str_replace('SITE_GALLERY_ID', $resource->id, $chunk->snippet));
+                $chunk->save();
+            }
         }
-        $tmp->fromArray(array(
-            'namespace' => 'core',
-            'area'      => 'site',
-            'xtype'     => 'textfield',
-            'value'     => $resource->get('id'),
-            'key'       => 'site_gallery_id',
-        ), '', true, true);
-        $tmp->save();
         
         if ($addPhotos && in_array('MIGX', $options['install_addons'])) {
-            $resource->setTVValue('gallery', $modx->toJSON(
+            $resource->setTVValue('elements', $modx->toJSON(
                     array(
                         array('MIGX_id' => 1, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal1.jpg', 'title' => 'Фото 1'),
                         array('MIGX_id' => 2, 'img' => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/gal2.jpg', 'title' => 'Фото 2'),
@@ -342,17 +335,15 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $resource->save();
         $newsAlias = $alias;
         
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_news_id'))) {
-            $tmp = $modx->newObject('modSystemSetting');
+        $chunks = array(
+                'aside'
+            );
+        foreach ($chunks as $chunk_name) {
+            if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
+                $chunk->set('snippet', str_replace('SITE_NEWS_ID', $resource->id, $chunk->snippet));
+                $chunk->save();
+            }
         }
-        $tmp->fromArray(array(
-            'namespace' => 'core',
-            'area'      => 'site',
-            'xtype'     => 'textfield',
-            'value'     => $resource->get('id'),
-            'key'       => 'site_news_id',
-        ), '', true, true);
-        $tmp->save();
         
         if ($addNews) {
             $newsParent = $resource->get('id');
@@ -413,22 +404,26 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 <p>Адрес: {$_modx->resource.address}</p>
                 <p>Телефон: {$_modx->resource.phone}</p>
                 <p>E-mail: {$_modx->resource.email}</p>
-                {include \'contact_form\'}
+                {$_modx->getChunk(\'contact_form\', [
+                  \'form\' => \'form.contact_form\',
+                  \'tpl\' => \'tpl.contact_form\',
+                  \'subject\' => \'Сообщение с сайта \' ~ $_modx->config.site_url,
+                  \'validate\' => \'name:required,phone:required,check:required\'
+                ])}
             ')
         ));
         $resource->save();
         
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_contacts_id'))) {
-            $tmp = $modx->newObject('modSystemSetting');
+        $chunks = array(
+                'header',
+                'contact_form'
+            );
+        foreach ($chunks as $chunk_name) {
+            if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
+                $chunk->set('snippet', str_replace('SITE_CONTACTS_ID', $resource->id, $chunk->snippet));
+                $chunk->save();
+            }
         }
-        $tmp->fromArray(array(
-            'namespace' => 'core',
-            'area'      => 'site',
-            'xtype'     => 'textfield',
-            'value'     => $resource->get('id'),
-            'key'       => 'site_contacts_id',
-        ), '', true, true);
-        $tmp->save();
         
         if (!$resource->getTVValue('address')) {
             $resource->setTVValue('address', 'г. Москва, ул. Печатников, д. 17, оф. 350');
@@ -547,6 +542,22 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             ")
         ));
         $resource->save();
+        
+        
+        
+        
+        $chunks = array(
+                'head'
+            );
+        foreach ($chunks as $chunk_name) {
+            if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
+                $snippet = $chunk->snippet;
+                $snippet = str_replace('SITE_FOLDER_NAME', strtolower($options['site_template_name']), $snippet);
+                $snippet = str_replace('ASSETS_URL', $modx->getOption('assets_url'), $snippet);
+                $chunk->set('snippet', $snippet);
+                $chunk->save();
+            }
+        }
         break;
     case xPDOTransport::ACTION_UNINSTALL:
         break;

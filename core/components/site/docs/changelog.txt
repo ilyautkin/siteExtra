@@ -1,3 +1,10 @@
+1.4.3-beta
+==============
+- New TVs: subtitle, keywords, elements
+- Sample of extending chunks
+- Sample using contact_form in contacts
+- Replace assets and siteextra path in chunk head
+
 1.4.2-beta
 ==============
 - Added og:image meta tag

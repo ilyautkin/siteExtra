@@ -250,18 +250,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'key'       => 'cache_prefix',
         ), '', true, true);
         $tmp->save();
-        
-        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'site_folder_name'))) {
-            $tmp = $modx->newObject('modSystemSetting');
-        }
-        $tmp->fromArray(array(
-            'namespace' => 'core',
-            'area'      => '',
-            'xtype'     => 'textfield',
-            'value'     => strtolower($options['site_category']),
-            'key'       => 'site_folder_name',
-        ), '', true, true);
-        $tmp->save();
 
         break;
 

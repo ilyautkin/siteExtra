@@ -1,4 +1,4 @@
-{var $gallery = $_modx->config.site_gallery_id | resource : 'gallery' | fromJSON}
+{var $gallery = SITE_GALLERY_ID | resource : 'elements' | fromJSON}
 <div class="row">
   {foreach $gallery as $idx => $galItem}
     {if $idx == 3}

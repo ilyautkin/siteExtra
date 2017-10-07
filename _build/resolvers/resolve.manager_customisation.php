@@ -62,6 +62,43 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             }
         }
         
+        if ($tv = $modx->getObject('modTemplateVar', array('name' => 'keywords'))) {
+            foreach ($set_list as $set) {
+                $rule_data = array(
+                        'set' => $set->id,
+                        'action' => $set->action,
+                        'name' => 'tv' . $tv->id,
+                        'container' => 'modx-panel-resource',
+                        'rule' => 'tvMove',
+                        'value' => 'modx-resource-main-left',
+                        'constraint_class' => 'modResource'
+                    );
+                if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
+                    $rule_data['active'] = true;
+                    $rule = $modx->newObject('modActionDom', $rule_data);
+                    $rule->save();
+                }
+            }
+        }
+        
+        if ($tv = $modx->getObject('modTemplateVar', array('name' => 'subtitle'))) {
+            foreach ($set_list as $set) {
+                $rule_data = array(
+                        'set' => $set->id,
+                        'action' => $set->action,
+                        'name' => 'tv' . $tv->id,
+                        'container' => 'modx-panel-resource',
+                        'rule' => 'tvMove',
+                        'value' => 'modx-resource-main-left',
+                        'constraint_class' => 'modResource'
+                    );
+                if (!$rule = $modx->getObject('modActionDom', $rule_data)) {
+                    $rule_data['active'] = true;
+                    $rule = $modx->newObject('modActionDom', $rule_data);
+                    $rule->save();
+                }
+            }
+        }
         
         if ($contacts = $modx->getObject('modResource', array('alias' => 'contacts', 'parent' => 0))) {
             $res_id = $contacts->get('id');
@@ -129,15 +166,14 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             }
         }
         
-        if ($gallery = $modx->getObject('modResource', array('alias' => 'gallery', 'parent' => 0))) {
-            $res_id = $gallery->get('id');
+        if (in_array('MIGX', $options['install_addons'])) {
             $set_list = array();
             $set = array('profile' => $profile->id);
-            if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource'), $set))) {
-                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => $res_id, 'constraint_field' => 'id', 'constraint_class' => 'modResource', 'description' => 'Правила для страницы галереи', 'active' => true), $set));
+            if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => 0, 'constraint_field' => 'parent', 'constraint_class' => 'modResource'), $set))) {
+                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => 0, 'constraint_field' => 'parent', 'constraint_class' => 'modResource', 'description' => 'Правила для страниц в корне сайта', 'active' => true), $set));
                 $set_list['update_set']->save();
             }
-            if ($tv = $modx->getObject('modTemplateVar', array('name' => 'gallery'))) {
+            if ($tv = $modx->getObject('modTemplateVar', array('name' => 'elements'))) {
                 foreach ($set_list as $set) {
                     $rule_data = array(
                             'set' => $set->id,

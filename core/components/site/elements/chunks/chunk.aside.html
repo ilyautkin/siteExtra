@@ -1,8 +1,6 @@
-{var $nws = $_modx->config.site_news_id}
-{var $spc = $_modx->config.site_specs_id}
 <br><hr>
 {'pdoResources' | snippet : [
-    'parents' => $nws,
+    'parents' => SITE_NEWS_ID,
     'limit' => 3,
     'tpl' => '@INLINE <div class="media">
           {if $img}
@@ -27,7 +25,7 @@
 <br>
 <div class="row">
     {'pdoResources' | snippet : [
-        'parents' => $spc,
+        'parents' => SITE_SPECS_ID,
         'limit' => 2,
         'sortby' => '{"menuindex":"ASC"}',
         'tpl' => '@INLINE <div class="col-md-6">
@@ -36,17 +34,20 @@
                   <img src="{$img | phpthumbon : "w=155&h=155&zc=1"}" alt="{$pagetitle}">
               </a>
               <div class="caption">
-                <p class="text-center"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></p>
+                <p class="text-center">
+                    <a href="{$uri}" title="{$longtitle}">{$pagetitle}</a><br>
+                    {$subtitle}
+                </p>
               </div>
             </div>
           </div>',
         'includeContent' => 1,
-        'includeTVs' => 'img',
+        'includeTVs' => 'img,subtitle',
         'tvPrefix' => '',
     ]}
     <div class="hidden-sm hidden-xs">
         {'pdoResources' | snippet : [
-            'parents' => $spc,
+            'parents' => SITE_SPECS_ID,
             'limit' => 2,
             'offset' => 2,
             'sortby' => '{"menuindex":"ASC"}',
@@ -56,12 +57,15 @@
                       <img src="{$img | phpthumbon : "w=155&h=155&zc=1"}" alt="{$pagetitle}">
                   </a>
                   <div class="caption">
-                    <p class="text-center"><a href="{$uri}" title="{$longtitle}">{$pagetitle}</a></p>
+                    <p class="text-center">
+                        <a href="{$uri}" title="{$longtitle}">{$pagetitle}</a><br>
+                        {$subtitle}
+                    </p>
                   </div>
                 </div>
               </div>',
             'includeContent' => 1,
-            'includeTVs' => 'img',
+            'includeTVs' => 'img,subtitle',
             'tvPrefix' => '',
         ]}
     </div>

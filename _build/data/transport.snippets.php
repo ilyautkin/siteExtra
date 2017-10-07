@@ -9,6 +9,10 @@ $tmp = array(
         'file' => 'clearphone',
         'description' => ''
     ),
+    'rtrim' => array(
+        'file' => 'rtrim',
+        'description' => ''
+    ),
 );
 
 foreach ($tmp as $k => $v) {
