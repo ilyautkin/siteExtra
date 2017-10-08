@@ -4,7 +4,7 @@
 .modx-tv-form-element input {padding: 5px 1% !important; width: 98% !important;}
 .tv_modx-grid-multitvgrid_items .x-grid3-body,
 .x-grid3-row {width: 100% !important;}
-.modx-js-parse-error {opacity: 1 !important;}
+.modx-js-parse-error {display: none !important;}
 .tvtEditor input {width: 14% !important;}
 .tvtEditor input.add,
 .tvtEditor input.del,
