@@ -6,8 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {if $_modx->resource.searchable}<meta name="robots" content="index, follow">
 {else}<meta name="robots" content="noindex, nofollow">{/if}
-<meta name="description" content="{$_modx->resource.description ?: ($_modx->resource.content | strip : true | striptags | ellipsis : "180")
-                                   | replace :' "':' «' | replace :'"':'»'}">
+{var $description = $_modx->resource.content | stripmodxtags | striptags | strip : true | ellipsis : "180"}
+{else}{var $description = $_modx->resource.description}{/if}
+<meta name="description" content="{$description | replace :' "':' «' | replace :'"':'»'}">
 <meta name="keywords" content="{$_modx->resource.keywords | replace :' "':' «' | replace :'"':'»'}" />
 {if $_modx->resource.img}<meta property="og:image" content="{$_modx->config.site_url | rtrim : '/'}{$_modx->resource.img | phpthumbon : "w=400&h=280"}" />{/if}
 
