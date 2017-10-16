@@ -2,6 +2,7 @@
 #modx-resource-description {height: 60px !important;}
 .x-form-item.modx-tv {padding-left: 0 !important;}
 .modx-tv-form-element input {padding: 5px 1% !important; width: 98% !important;}
+.modx-richtext {width: 98%;height: 140px;border-color: #E4E4E4;padding: 5px 1%;border-radius: 3px;font-family: inherit;line-height: 120%;}
 .tv_modx-grid-multitvgrid_items .x-grid3-body,
 .modx-tv-form-element .x-form-field-wrap,
 .x-grid3-row {width: 100% !important;}
