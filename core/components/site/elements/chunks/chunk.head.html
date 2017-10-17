@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {if $_modx->resource.searchable}<meta name="robots" content="index, follow">
 {else}<meta name="robots" content="noindex, nofollow">{/if}
+{if !$_modx->resource.description && !($_modx->resource.content | ellipsis : "500" | match : '*{*')}
 {var $description = $_modx->resource.content | stripmodxtags | striptags | strip : true | ellipsis : "180"}
 {else}{var $description = $_modx->resource.description}{/if}
 <meta name="description" content="{$description | replace :' "':' «' | replace :'"':'»'}">
