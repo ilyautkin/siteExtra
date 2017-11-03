@@ -1,3 +1,11 @@
+1.4.5-beta
+==============
+- Hide modx parse error window
+- Fix width for MIGX multiform field
+- Richtext field styles
+- Content is default for description tag
+- strtolower in SiteRedirect plugin
+
 1.4.4-beta
 ==============
 - Fix addManagerCss bug
