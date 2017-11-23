@@ -25,7 +25,8 @@ $addons = array(
             'Console' => '2.1.0-beta',
             'MIGX' => '2.9.6-pl',
             'translit' => '1.0.0-beta',
-            'VersionX' => '2.1.3-pl'
+            'VersionX' => '2.1.3-pl',
+            'SmushIt' => '1.0.0-beta'
         )),
     array('name' => 'modstore.pro', 'packages' => array(
             'Ace' => '1.6.5-pl',
