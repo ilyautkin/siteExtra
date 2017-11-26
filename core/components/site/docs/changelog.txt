@@ -1,3 +1,9 @@
+1.4.6-rc
+==============
+- Added SmushIt addon
+- Added favicon.ico
+- Added quote and asterisk to friendly_alias_restrict_chars_pattern
+
 1.4.5-beta
 ==============
 - Hide modx parse error window
