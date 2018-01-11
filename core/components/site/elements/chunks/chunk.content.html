@@ -1,14 +1,14 @@
-{var $defaul = true}
+{var $default = true}
 {switch $_modx->resource.id}
     {case SITE_SPECS_ID}
-        {var $defaul = false}
+        {var $default = false}
         {include 'specialists'}
 {/switch}
 {switch $_modx->resource.parent}
     {case SITE_SPECS_ID}
-        {var $defaul = false}
+        {var $default = false}
         {include 'content_specialist'}
 {/switch}
-{if $defaul}
+{if $default}
     {include 'content_default'}
 {/if}
