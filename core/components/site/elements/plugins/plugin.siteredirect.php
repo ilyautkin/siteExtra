@@ -2,7 +2,14 @@
 if ($modx->event->name != "OnHandleRequest" || $modx->context->key == 'mgr') {
    return;
 }
-$uri = '/' . strtolower(trim($_SERVER['REQUEST_URI'], '/'));
+$tmp = explode('?', $_SERVER['REQUEST_URI']);
+$link = trim($tmp[0], '/');
+if (isset($tmp[1]) && $tmp[1]) {
+    $params = '?' . $tmp[1];
+} else {
+    $params = '';
+}
+$uri = '/' . strtolower($link) . $params;
 $http_host = $_SERVER['HTTP_HOST'];
 $site_url = str_replace(array('www.', 'http://', 'https://', '/'), '', $modx->getOption('site_url'));
 
