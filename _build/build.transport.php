@@ -18,7 +18,6 @@ $addons = array(
     array('name' => '', 'packages' => array(
             'simpleUpdater' => '0.1.0-beta',
             'FormIt' => '2.2.10-pl',
-            'autoRedirector' => '0.1.0-beta',
             'CKEditor' => '1.3.0-pl',
             'TinyMCE Rich Text Editor' => '1.2.0-pl',
             'Collections' => '3.4.2-pl',
@@ -30,6 +29,7 @@ $addons = array(
         )),
     array('name' => 'modstore.pro', 'packages' => array(
             'Ace' => '1.6.5-pl',
+            'autoRedirector' => '0.1.0-beta',
             'pdoTools' => '2.5.1-pl',
             'AjaxForm' => '1.1.5-pl',
             'MinifyX' => '1.4.4-pl',
