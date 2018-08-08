@@ -1,3 +1,10 @@
+1.4.7-rc
+==============
+- Site_url changed to http_host in emails
+- Fenom syntax changed to short version
+- Container suffix and html-extention are removed
+- Added manager favicon
+
 1.4.6-rc
 ==============
 - Added SmushIt addon

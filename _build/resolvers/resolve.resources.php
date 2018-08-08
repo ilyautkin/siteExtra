@@ -404,10 +404,10 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 <p>Адрес: {$_modx->resource.address}</p>
                 <p>Телефон: {$_modx->resource.phone}</p>
                 <p>E-mail: {$_modx->resource.email}</p>
-                {$_modx->getChunk(\'contact_form\', [
+                {\'contact_form\' | chunk : [
                   \'form\' => \'form.contact_form\',
                   \'tpl\' => \'tpl.contact_form\',
-                  \'subject\' => \'Сообщение с сайта \' ~ $_modx->config.site_url,
+                  \'subject\' => \'Заявка с сайта \' ~ $_modx->config.http_host,
                   \'validate\' => \'name:required,phone:required,check:required\'
                 ])}
             ')

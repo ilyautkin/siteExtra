@@ -94,6 +94,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
 
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'container_suffix'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'furls',
+            'xtype'     => 'textfield',
+            'value'     => '',
+            'key'       => 'container_suffix',
+        ), '', true, true);
+        $tmp->save();
+
         if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'friendly_alias_restrict_chars_pattern'))) {
             $tmp = $modx->newObject('modSystemSetting');
         }
@@ -248,6 +260,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'xtype'     => 'textfield',
             'value'     => '',
             'key'       => 'cache_prefix',
+        ), '', true, true);
+        $tmp->save();
+        
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'manager_favicon_url'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'manager',
+            'xtype'     => 'textfield',
+            'value'     => $modx->getOption('assets_url') . 'components/' . strtolower($options['site_category']) . '/web/img/favicon.ico',
+            'key'       => 'manager_favicon_url',
         ), '', true, true);
         $tmp->save();
 
