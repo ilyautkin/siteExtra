@@ -12,6 +12,7 @@ $resolvers = array(
     'settings',
     'set_start_year',
     'fix_translit',
+    'content_type',
     'manager_customisation'
 );
 $addons = array(
