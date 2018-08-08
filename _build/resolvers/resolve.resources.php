@@ -409,7 +409,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                   \'tpl\' => \'tpl.contact_form\',
                   \'subject\' => \'Заявка с сайта \' ~ $_modx->config.http_host,
                   \'validate\' => \'name:required,phone:required,check:required\'
-                ])}
+                ]}
             ')
         ));
         $resource->save();
