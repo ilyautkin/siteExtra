@@ -197,7 +197,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'uri_override' => 0,
             'published'    => 1,
             'publishedon'  => time(),
-            'hidemenu'     => 1,
+            'hidemenu'     => 0,
             'richtext'     => 1,
             'parent'       => $parent,
             'template'     => $templateId,
