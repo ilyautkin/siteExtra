@@ -5,10 +5,6 @@
 $snippets = array();
 
 $tmp = array(
-    'clearPhone' => array(
-        'file' => 'clearphone',
-        'description' => ''
-    ),
     'rtrim' => array(
         'file' => 'rtrim',
         'description' => ''
