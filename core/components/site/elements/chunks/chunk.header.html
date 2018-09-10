@@ -14,7 +14,7 @@
   </div>
   <div class="col-sm-4">
     <h2 class="text-right">
-      <nobr><a href="tel:{$cnt | resource : 'phone'  | clearPhone}">{$cnt | resource : 'phone'}</a></nobr>
+      <nobr><a href="tel:{$cnt | resource : 'phone'  | preg_replace : '/[^0-9+]/' : ''}">{$cnt | resource : 'phone'}</a></nobr>
     </h2>
   </div>
 </header>
