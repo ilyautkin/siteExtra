@@ -275,6 +275,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ), '', true, true);
         $tmp->save();
 
+        if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'log_deprecated'))) {
+            $tmp = $modx->newObject('modSystemSetting');
+        }
+        $tmp->fromArray(array(
+            'namespace' => 'core',
+            'area'      => 'system',
+            'xtype'     => 'combo-boolean',
+            'value'     => '0',
+            'key'       => 'log_deprecated',
+        ), '', true, true);
+        $tmp->save();
+        
         break;
 
     case xPDOTransport::ACTION_UNINSTALL:

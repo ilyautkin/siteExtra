@@ -1,3 +1,7 @@
+1.4.8-rc
+==============
+- Sistem setting log_deprecated set false
+
 1.4.7-rc
 ==============
 - Site_url changed to http_host in emails
