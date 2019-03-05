@@ -16,9 +16,6 @@ $site_url = str_replace(array('www.', 'http://', 'https://', '/'), '', $modx->ge
 // for https set true
 $https = false;
 
-// robots.txt allways without redirect
-if ($uri == '/robots.txt') return;
-
 if ($https) {
     $protocol = 'https://';
 } else {
