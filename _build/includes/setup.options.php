@@ -28,7 +28,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                         'CKEditor',
                         'TinyMCE Rich Text Editor',
                         'tagElementPlugin',
-                        'frontendManager'
+                        'frontendManager',
+                        'SmushIt',
                     ))) {
                     $checked = 'checked';
                 } else {

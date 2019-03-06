@@ -65,6 +65,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tvs[] = $tv->get('id');
         }
         
+        /* Перенесено в ClientConfig
+        
         $name = 'address';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
@@ -103,6 +105,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tv->save();
             $tvs[] = $tv->get('id');
         }
+        */
         
         $name = 'keywords';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {

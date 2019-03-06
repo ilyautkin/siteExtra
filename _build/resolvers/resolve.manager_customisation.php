@@ -100,6 +100,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             }
         }
         
+        /* Перенесено в ClientConfig
         if ($contacts = $modx->getObject('modResource', array('alias' => 'contacts', 'parent' => 0))) {
             $res_id = $contacts->get('id');
             $set_list = array();
@@ -165,6 +166,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 }
             }
         }
+        */
         
         if (in_array('MIGX', $options['install_addons'])) {
             $set_list = array();

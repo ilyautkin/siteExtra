@@ -29,8 +29,16 @@ $tmp = array(
         'file' => 'content_default',
         'description' => ''
     ),
-    'content_specialist' => array(
-        'file' => 'content_specialist',
+    'content_main' => array(
+        'file' => 'content_main',
+        'description' => ''
+    ),
+    'content_spec' => array(
+        'file' => 'content_spec',
+        'description' => ''
+    ),
+    'content_spec_list' => array(
+        'file' => 'content_spec_list',
         'description' => ''
     ),
     'aside' => array(
@@ -51,10 +59,6 @@ $tmp = array(
     ),
     'tpl.contact_form' => array(
         'file' => 'tpl_contact_form',
-        'description' => ''
-    ),
-    'specialists' => array(
-        'file' => 'specialists',
         'description' => ''
     ),
     'gallery' => array(

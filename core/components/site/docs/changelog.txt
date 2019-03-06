@@ -1,3 +1,8 @@
+1.5.0-pl
+==============
+- Contact fields moved to ClientConfig
+- Renamed content chunks (content_spec and content_spec_list)
+
 1.4.8-rc
 ==============
 - Sistem setting log_deprecated set false

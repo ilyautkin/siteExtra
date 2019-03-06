@@ -9,9 +9,6 @@
     {if $show_on_page | match : '*gallery*'}
       {include 'gallery'}
     {/if}
-    {if $_modx->resource.id == $_modx->config.site_start}
-      {include 'block.gallery'}
-    {/if}
     {if $show_on_page | match : '*children*'}
       {include 'child_list'}
     {/if}

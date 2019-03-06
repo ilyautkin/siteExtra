@@ -15,6 +15,15 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $site_start->set('hidemenu', true);
             $site_start->save();
         }
+        $chunks = array(
+                'content'
+            );
+        foreach ($chunks as $chunk_name) {
+            if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
+                $chunk->set('snippet', str_replace('SITE_START_ID', $site_start->id, $chunk->snippet));
+                $chunk->save();
+            }
+        }
             
         /* robots.txt */
         $alias = 'robots';
@@ -401,9 +410,9 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'parent'       => $parent,
             'template'     => $templateId,
             'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', '
-                <p>Адрес: {$_modx->resource.address}</p>
-                <p>Телефон: {$_modx->resource.phone}</p>
-                <p>E-mail: {$_modx->resource.email}</p>
+                <p>Адрес: {"address" | config}</p>
+                <p>Телефон: {"phone" | config}</p>
+                <p>E-mail: {"email" | config}</p>
                 {\'contact_form\' | chunk : [
                   \'form\' => \'form.contact_form\',
                   \'tpl\' => \'tpl.contact_form\',
@@ -414,6 +423,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ));
         $resource->save();
         
+        
+        /* Перенесено в ClientConfig
         $chunks = array(
                 'header',
                 'contact_form'
@@ -424,7 +435,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 $chunk->save();
             }
         }
-        
         if (!$resource->getTVValue('address')) {
             $resource->setTVValue('address', 'г. Москва, ул. Печатников, д. 17, оф. 350');
         }
@@ -434,6 +444,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         if (!$resource->getTVValue('email')) {
             $resource->setTVValue('email', 'info@company.ru');
         }
+        */
 
         /* 404 */
         $alias = '404';
