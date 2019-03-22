@@ -39,8 +39,9 @@ $addons = array(
             'phpThumbOn' => '1.3.5-beta',
             'tagElementPlugin' => '1.3.0-pl',
             'frontendManager' => '1.1.1-beta',
-            'FastUploadTV' => '1.0.1-pl'
+            'FastUploadTV' => '1.0.1-pl',
+            'logRotation' => '1.0.0-beta'
         )),
 );
-$builder = new siteBuilder('site', '1.5.0', 'pl', $resolvers, $addons);
+$builder = new siteBuilder('site', '1.5.1', 'pl', $resolvers, $addons);
 $builder->build();
