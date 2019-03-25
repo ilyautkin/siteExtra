@@ -506,7 +506,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 {\'contact_form\' | chunk : [
                   \'form\' => \'form.contact_form\',
                   \'tpl\' => \'tpl.contact_form\',
-                  \'subject\' => \'Заявка с сайта \' ~ $_modx->config.http_host,
+                  \'subject\' => \'Message from \' ~ $_modx->config.http_host,
                   \'validate\' => \'name:required,phone:required,check:required\'
                 ]}
             ';
