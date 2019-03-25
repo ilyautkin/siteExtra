@@ -230,7 +230,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $menutitle = 'Отзывы';
         } else {
             $pagetitle = 'Feedback from our customers';
-            $menutitle = 'Reviews';
+            $menutitle = 'Testimonials';
         }
         if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
             $resource = $modx->newObject('modResource');
@@ -799,6 +799,22 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 $chunk->save();
             }
         }
+        
+        $chunks = array(
+                'aside',
+                'child_list',
+            );
+        foreach ($chunks as $chunk_name) {
+            if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
+                $snippet = $chunk->snippet;
+                if ($modx->getOption('cultureKey') != 'ru') {
+                    $snippet = str_replace(' | date_format : "%d.%m.%Y г."', ' | date : "F d, Y"', $snippet);
+                }
+                $chunk->set('snippet', $snippet);
+                $chunk->save();
+            }
+        }
+        
         break;
     case xPDOTransport::ACTION_UNINSTALL:
         break;
