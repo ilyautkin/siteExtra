@@ -486,8 +486,30 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $parent = 0;
         if ($modx->getOption('cultureKey') == 'ru') {
             $pagetitle = 'Контактная информация';
+            $content = '
+                <p>Адрес: {"address" | config}</p>
+                <p>Телефон: {"phone" | config}</p>
+                <p>E-mail: {"email" | config}</p>
+                {\'contact_form\' | chunk : [
+                  \'form\' => \'form.contact_form\',
+                  \'tpl\' => \'tpl.contact_form\',
+                  \'subject\' => \'Заявка с сайта \' ~ $_modx->config.http_host,
+                  \'validate\' => \'name:required,phone:required,check:required\'
+                ]}
+            ';
         } else {
             $pagetitle = 'Contacts';
+            $content = '
+                <p>Address: {"address" | config}</p>
+                <p>Phone: {"phone" | config}</p>
+                <p>E-mail: {"email" | config}</p>
+                {\'contact_form\' | chunk : [
+                  \'form\' => \'form.contact_form\',
+                  \'tpl\' => \'tpl.contact_form\',
+                  \'subject\' => \'Заявка с сайта \' ~ $_modx->config.http_host,
+                  \'validate\' => \'name:required,phone:required,check:required\'
+                ]}
+            ';
         }
         if (!$resource = $modx->getObject('modResource', array('alias' => $alias))) {
             $resource = $modx->newObject('modResource');
@@ -506,17 +528,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             'richtext'     => 0,
             'parent'       => $parent,
             'template'     => $templateId,
-            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', '
-                <p>Адрес: {"address" | config}</p>
-                <p>Телефон: {"phone" | config}</p>
-                <p>E-mail: {"email" | config}</p>
-                {\'contact_form\' | chunk : [
-                  \'form\' => \'form.contact_form\',
-                  \'tpl\' => \'tpl.contact_form\',
-                  \'subject\' => \'Заявка с сайта \' ~ $_modx->config.http_host,
-                  \'validate\' => \'name:required,phone:required,check:required\'
-                ]}
-            ')
+            'content'      => preg_replace(array('/^\n/', '/[ ]{2,}|[\t]/'), '', $content)
         ));
         $resource->save();
         
@@ -728,6 +740,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     $snippet = str_replace('Наши специалисты свяжутся с вами<br>в ближайшее время.', 'Your message has been sent', $snippet);
                     $snippet = str_replace('В форме содержатся ошибки', 'There are errors in the form', $snippet);
                     $snippet = str_replace('Пожалуйста, укажите, как к вам обращаться', 'Please specify your name', $snippet);
+                    $snippet = str_replace('Оставьте свой номер телефона, чтобы мы могли с вами связаться', 'Please specify your phone', $snippet);
                     $snippet = str_replace('Вы должны дать разрешение на обработку своих персональных данных', 'Please accept the terms', $snippet);
                 }
                 $chunk->set('snippet', $snippet);
@@ -750,7 +763,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         }
         
         $chunks = array(
-                'form_contact_form',
+                'form.contact_form',
             );
         foreach ($chunks as $chunk_name) {
             if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
@@ -770,7 +783,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         }
         
         $chunks = array(
-                'tpl_contact_form',
+                'tpl.contact_form',
             );
         foreach ($chunks as $chunk_name) {
             if ($chunk = $modx->getObject('modChunk', array('name' => $chunk_name))) {
