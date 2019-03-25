@@ -17,11 +17,21 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $set = array('profile' => $profile->id);
         $set_list = array();
         if (!$set_list['create_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create'), $set))) {
-            $set_list['create_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create', 'description' => 'Правила для новых страниц', 'active' => true), $set));
+            if ($modx->getOption('cultureKey') == 'ru') {
+                $description = 'Правила для новых страниц';
+            } else {
+                $description = 'Crating pages';
+            }
+            $set_list['create_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/create', 'description' => $description, 'active' => true), $set));
             $set_list['create_set']->save();
         }
         if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update'), $set))) {
-            $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'description' => 'Правила для редактирования', 'active' => true), $set));
+            if ($modx->getOption('cultureKey') == 'ru') {
+                $description = 'Правила для редактирования';
+            } else {
+                $description = 'Updating pages';
+            }
+            $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'description' => $description, 'active' => true), $set));
             $set_list['update_set']->save();
         }
         if ($tv = $modx->getObject('modTemplateVar', array('name' => 'img'))) {
@@ -172,7 +182,12 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $set_list = array();
             $set = array('profile' => $profile->id);
             if (!$set_list['update_set'] = $modx->getObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => 0, 'constraint_field' => 'parent', 'constraint_class' => 'modResource'), $set))) {
-                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => 0, 'constraint_field' => 'parent', 'constraint_class' => 'modResource', 'description' => 'Правила для страниц в корне сайта', 'active' => true), $set));
+                if ($modx->getOption('cultureKey') == 'ru') {
+                    $description = 'Правила для страниц в корне сайта';
+                } else {
+                    $description = 'Root pages';
+                }
+                $set_list['update_set'] = $modx->newObject('modFormCustomizationSet', array_merge(array('action' => 'resource/update', 'constraint' => 0, 'constraint_field' => 'parent', 'constraint_class' => 'modResource', 'description' => $description, 'active' => true), $set));
                 $set_list['update_set']->save();
             }
             if ($tv = $modx->getObject('modTemplateVar', array('name' => 'elements'))) {

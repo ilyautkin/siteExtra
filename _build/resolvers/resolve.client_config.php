@@ -14,16 +14,30 @@ if ($object->xpdo) {
             if ($clientConfig instanceof ClientConfig) {
                 if (!$groups = $modx->getCollection('cgGroup')) {
                     $group = $modx->newObject('cgGroup');
-                    $group->set('label', 'Контактная информация');
+                    if ($modx->getOption('cultureKey') == 'ru') {
+                        $group->set('label', 'Контактная информация');
+                    } else {
+                        $group->set('label', 'Contacts');
+                    }
                     $group->set('description', '');
                     $group->save();
                     
-                    $settings = [
-                        ['key' => 'address', 'label' => 'Адрес', 'value' => 'г. Москва, ул. Печатников, д. 17, оф. 350'],
-                        ['key' => 'phone', 'label' => 'Телефон', 'value' => '+7 (499) 150-22-22'],
-                        ['key' => 'email', 'label' => 'E-mail', 'value' => 'info@company.ru'],
-                        ['key' => 'emailto', 'label' => 'E-mail для заявок', 'value' => $modx->getOption('emailsender')],
-                    ];
+                    
+                    if ($modx->getOption('cultureKey') == 'ru') {
+                        $settings = [
+                            ['key' => 'address', 'label' => 'Адрес', 'value' => 'г. Москва, ул. Печатников, д. 17, оф. 350'],
+                            ['key' => 'phone', 'label' => 'Телефон', 'value' => '+7 (499) 150-22-22'],
+                            ['key' => 'email', 'label' => 'E-mail', 'value' => 'info@company.ru'],
+                            ['key' => 'emailto', 'label' => 'E-mail для заявок', 'value' => $modx->getOption('emailsender')],
+                        ];
+                    } else {
+                        $settings = [
+                            ['key' => 'address', 'label' => 'Address', 'value' => '6358 Belmont St Hamtramck, MI 48212, USA'],
+                            ['key' => 'phone', 'label' => 'Phone', 'value' => '+1 313-150-2222'],
+                            ['key' => 'email', 'label' => 'Display E-mail', 'value' => 'info@company.com'],
+                            ['key' => 'emailto', 'label' => 'E-mail receiver', 'value' => $modx->getOption('emailsender')],
+                        ];
+                    }
                     
                     foreach ($settings as $idx => $data) {
                         $setting = $modx->newObject('cgSetting');
@@ -42,7 +56,11 @@ if ($object->xpdo) {
                         if ($menu->get('parent') != 'topnav') {
                             $data = $menu->toArray();
                             $data['previous_text'] = $menu->get('text');
-                            $data['text'] = 'Контакты';
+                            if ($modx->getOption('cultureKey') == 'ru') {
+                                $data['text'] = 'Контакты';
+                            } else {
+                                $data['text'] = 'Contacts';
+                            }
                             $data['parent'] = 'topnav';
                             $data['description'] = '';
                             $data['icon'] = '';

@@ -29,10 +29,15 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             } else {
                 $image_tv_type = 'image';
             }
+            if ($modx->getOption('cultureKey') == 'ru') {
+                $caption = 'Изображение';
+            } else {
+                $caption = 'Image';
+            }
             $tv->fromArray(array(
                 'name'         => $name,
                 'type'         => $image_tv_type,
-                'caption'      => 'Изображение',
+                'caption'      => $caption, //'Изображение',
                 'category'     => $cat_id,
                 'input_properties' => array(
                                         "path" => "assets/images/{d}-{m}-{y}/",
@@ -49,10 +54,15 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $name = 'show_on_page';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            if ($modx->getOption('cultureKey') == 'ru') {
+                $caption = 'Отображать на странице';
+            } else {
+                $caption = 'Display on page';
+            }
             $tv->fromArray(array(
                 'name'         => $name,
                 'type'         => 'checkbox',
-                'caption'      => 'Отображать на странице',
+                'caption'      => $caption, //'Отображать на странице',
                 'category'     => $cat_id,
                 'elements'     => 'Дочерние ресурсы==children||Контент==content||Галерею==gallery',
                 'default_text' => 'children||content||gallery',
@@ -73,7 +83,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tv->fromArray(array(
                 'name'         => $name,
                 'type'         => 'text',
-                'caption'      => 'Адрес',
+                'caption'      => $caption, //'Адрес',
                 'category'     => $cat_id
             ));
             $tv->save();
@@ -86,7 +96,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tv->fromArray(array(
                 'name'         => $name,
                 'type'         => 'text',
-                'caption'      => 'Телефон',
+                'caption'      => $caption, //'Телефон',
                 'category'     => $cat_id
             ));
             $tv->save();
@@ -99,7 +109,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $tv->fromArray(array(
                 'name'         => $name,
                 'type'         => 'text',
-                'caption'      => 'E-mail',
+                'caption'      => $caption, //'E-mail',
                 'category'     => $cat_id
             ));
             $tv->save();
@@ -110,10 +120,15 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $name = 'keywords';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            if ($modx->getOption('cultureKey') == 'ru') {
+                $caption = 'Keywords';
+            } else {
+                $caption = 'Keywords';
+            }
             $tv->fromArray(array(
                 'name'         => $name,
                 'type'         => 'text',
-                'caption'      => 'Keywords',
+                'caption'      => $caption, //'Keywords',
                 'category'     => $cat_id
             ));
             $tv->save();
@@ -123,10 +138,15 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $name = 'subtitle';
         if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
             $tv = $modx->newObject('modTemplateVar');
+            if ($modx->getOption('cultureKey') == 'ru') {
+                $caption = 'Подпись';
+            } else {
+                $caption = 'Subtitle';
+            }
             $tv->fromArray(array(
                 'name'         => $name,
                 'type'         => 'text',
-                'caption'      => 'Подпись',
+                'caption'      => $caption, //'Подпись',
                 'category'     => $cat_id
             ));
             $tv->save();
@@ -137,16 +157,34 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $name = 'elements';
             if (!$tv = $modx->getObject('modTemplateVar', array('name' => $name))) {
                 $tv = $modx->newObject('modTemplateVar');
-                $tv->fromArray(array(
-                    'name'         => $name,
-                    'type'         => 'migx',
-                    'caption'      => 'Элементы',
-                    'category'     => $cat_id,
-                    'input_properties' => array(
-                                            "formtabs" => '[{"caption":"Элемент","fields":[{"field":"title","caption":"Заголовок"},{"field":"subtitle","caption":"Подзаголовок"},{"field":"img","caption":"Изображение","inputTV":"img"},{"field":"content","caption":"Контент","inputTVtype":"richtext"}]}]',
-                                            "columns" => '[{"header":"Изображение","dataIndex":"img","width":200,"renderer":"this.renderImage"},{"header":"Содержимое","dataIndex":"title","width":400}]'
-                                        ),
-                ));
+                if ($modx->getOption('cultureKey') == 'ru') {
+                    $caption = 'Элементы';
+                } else {
+                    $caption = 'Elements';
+                }
+                if ($modx->getOption('cultureKey') == 'ru') {
+                    $tv->fromArray(array(
+                        'name'         => $name,
+                        'type'         => 'migx',
+                        'caption'      => $caption, //'Элементы',
+                        'category'     => $cat_id,
+                        'input_properties' => array(
+                                                "formtabs" => '[{"caption":"Элемент","fields":[{"field":"title","caption":"Заголовок"},{"field":"subtitle","caption":"Подзаголовок"},{"field":"img","caption":"Изображение","inputTV":"img"},{"field":"content","caption":"Контент","inputTVtype":"richtext"}]}]',
+                                                "columns" => '[{"header":"Изображение","dataIndex":"img","width":200,"renderer":"this.renderImage"},{"header":"Содержимое","dataIndex":"title","width":400}]'
+                                            ),
+                    ));
+                } else {
+                    $tv->fromArray(array(
+                        'name'         => $name,
+                        'type'         => 'migx',
+                        'caption'      => $caption, //'Элементы',
+                        'category'     => $cat_id,
+                        'input_properties' => array(
+                                                "formtabs" => '[{"caption":"Element","fields":[{"field":"title","caption":"Title"},{"field":"subtitle","caption":"Subtitle"},{"field":"img","caption":"Image","inputTV":"img"},{"field":"content","caption":"Content","inputTVtype":"richtext"}]}]',
+                                                "columns" => '[{"header":"Image","dataIndex":"img","width":200,"renderer":"this.renderImage"},{"header":"Content","dataIndex":"title","width":400}]'
+                                            ),
+                    ));
+                }
                 $tv->save();
                 $tvs[] = $tv->get('id');
             }
