@@ -13,6 +13,7 @@ if ($object->xpdo) {
             
             if ($clientConfig instanceof ClientConfig) {
                 if (!$groups = $modx->getCollection('cgGroup')) {
+                    $modx->log(modX::LOG_LEVEL_INFO, 'Run <b>client_config</b> resolver');
                     $group = $modx->newObject('cgGroup');
                     if ($modx->getOption('cultureKey') == 'ru') {
                         $group->set('label', 'Контактная информация');
@@ -70,11 +71,11 @@ if ($object->xpdo) {
                             if ($response->isError()) {
                                 $modx->log(modX::LOG_LEVEL_INFO, print_r($modx->error->failure($response->getMessage()), true));
                             }
+                            $modx->error->reset();
                         }
                     }
                 }
             }
-			$modx->log(modX::LOG_LEVEL_INFO, 'Run <b>client_config</b> resolver');
 			break;
 
 		case xPDOTransport::ACTION_UNINSTALL:
