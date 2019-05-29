@@ -41,7 +41,8 @@ $addons = array(
             'tagElementPlugin' => '1.3.0-pl',
             'frontendManager' => '1.1.1-beta',
             'FastUploadTV' => '1.0.1-pl',
-            'logRotation' => '1.0.0-beta'
+            'logRotation' => '1.0.0-beta',
+            'controlErrorLog' => '1.3.1-pl'
         )),
 );
 $builder = new siteBuilder('site', '1.5.3', 'pl', $resolvers, $addons);
