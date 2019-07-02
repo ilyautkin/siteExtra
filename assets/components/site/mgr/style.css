@@ -7,8 +7,3 @@
 .modx-tv-form-element .x-form-field-wrap,
 .x-grid3-row {width: 100% !important;}
 .modx-js-parse-error {display: none !important;}
-.tvtEditor input {width: 14% !important;}
-.tvtEditor input.add,
-.tvtEditor input.del,
-.tvtEditor input.del_item,
-.tvtEditor input.add_item {width: 30px !important; padding: 8px 23px 22px 10px !important;}
